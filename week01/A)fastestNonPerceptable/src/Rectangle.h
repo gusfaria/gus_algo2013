@@ -21,11 +21,7 @@ public:
 	Rectangle();
 	void update();
 	void draw();
-
-    void interpolate(float myPct);
-
-    float pct;
-    ofPoint posa;
-    ofPoint posb;
+    
+    float rectSpeed;
     ofPoint pos;
 };

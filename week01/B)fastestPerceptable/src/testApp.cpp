@@ -6,34 +6,33 @@ void testApp::setup(){
     ofBackground(0);
     ofSetVerticalSync(TRUE);
     
-    myRect.pos.x = ofGetWindowWidth();
-	myRect.pos.y = ofGetWindowHeight();
-	myRect.posa.x = 0;
-	myRect.posa.y = ofGetWindowHeight()/2;
-	myRect.posb.x = ofGetWindowWidth();
-	myRect.posb.y = ofGetWindowHeight()/2;
-    
-    myRect.interpolate(0);
+    myRect.pos.x = 0;
+    myRect.pos.y = ofGetWindowHeight()/2;
+    myRect.rectSpeed = 20;
 
+    speed = 0;
+    inchesSec = 0;
+    milesHour = 0;
 
 }
 
 //--------------------------------------------------------------
 void testApp::update(){
-    
-    pct += 0.03;
-    if (pct> 1) {
-        pct = 0;
-    }
-    
-    myRect.interpolate(pct);
     myRect.update();
+    
+    speed = myRect.rectSpeed * ofGetFrameRate();
+    inchesSec = (speed * 11.3125) / ofGetWindowWidth();
+    milesHour = (inchesSec*3600) / 63360;
 }
 //--------------------------------------------------------------
 void testApp::draw(){
-
     myRect.draw();
-
+    if(myRect.pos.x >= ofGetWindowWidth()) myRect.pos.x=0;
+    
+    //    ofDrawBitmapString("Position:" + ofToString(myRect.pos.x), ofPoint(10,20));
+    ofDrawBitmapString("Speed: " + ofToString(speed), ofPoint(10,35));
+    ofDrawBitmapString("Inches per Second: " + ofToString(inchesSec), ofPoint(10,50));
+    ofDrawBitmapString("Miles per hour: " + ofToString(milesHour), ofPoint(10,65));
 }
 
 //--------------------------------------------------------------

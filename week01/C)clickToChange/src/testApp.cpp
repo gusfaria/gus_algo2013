@@ -10,8 +10,8 @@ void testApp::setup(){
     myRectangle.pos.y = 0;
 	myRectangle.posa.x = 0;
     myRectangle.posa.y = 0;
-    myRectangle.posb.x = ofGetWindowWidth();
-    myRectangle.posb.y = ofGetWindowHeight();
+    myRectangle.posb.x = ofRandom(0, ofGetWindowWidth());
+    myRectangle.posb.y = ofRandom(0, ofGetWindowHeight());
 
     pct = 0;
     
@@ -55,8 +55,11 @@ void testApp::mouseDragged(int x, int y, int button){
 
 //--------------------------------------------------------------
 void testApp::mousePressed(int x, int y, int button){
-        myRectangle.posa.x = x;
-        myRectangle.posa.y = y;
+    myRectangle.posa.x = x;
+    myRectangle.posa.y = y;
+
+    myRectangle.posb.x = ofRandom(0, ofGetWindowWidth());
+    myRectangle.posb.y = ofRandom(0, ofGetWindowHeight());
 }
 
 //--------------------------------------------------------------

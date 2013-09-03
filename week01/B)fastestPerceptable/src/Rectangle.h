@@ -19,12 +19,9 @@ public:
 	void update();
 	void draw();
     
-    void interpolate(float myPct);
-    
-    float pct;
-    ofPoint posa;
-    ofPoint posb;
     ofPoint pos;
+    float rectSpeed;
+    
 };
 
 

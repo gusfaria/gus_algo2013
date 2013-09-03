@@ -21,6 +21,6 @@ class testApp : public ofBaseApp{
 		void gotMessage(ofMessage msg);
     
         Rectangle myRect;
-        float pct;
-		
+        float speed, inchesSec, milesHour;
+
 };
