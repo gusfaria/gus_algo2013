@@ -33,6 +33,6 @@ void Element::zenoToPoint(float catchSpeed, float catchX){
     float catchUpSpeed = catchSpeed;
 	pos.x = catchUpSpeed * catchX + (1-catchUpSpeed) * pos.x;
 //	pos.y = catchUpSpeed * catchY + (1-catchUpSpeed) * pos.y;
-    
+
     
 }

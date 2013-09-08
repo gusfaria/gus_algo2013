@@ -24,11 +24,6 @@ void testApp::draw(){
     for (int i=0; i < 20; i++) {
         myElements[i].draw(100*i, 5*i, 50*i, 50*i);
     }
-//        myElement.draw(255,0,0);
-//        myElement.draw(0,255,0);
-//        myElement.draw(0,0,255);
-    
-    
 }
 
 //--------------------------------------------------------------

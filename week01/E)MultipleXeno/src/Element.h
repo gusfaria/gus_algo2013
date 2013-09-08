@@ -22,8 +22,5 @@ class Element{
     void draw(int r, int g, int b, int posY);
     void zenoToPoint(float catchSpeed, float catchX);
     
-    
     ofPoint pos;
-    float pct;
-
 };
