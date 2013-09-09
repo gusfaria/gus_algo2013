@@ -6,32 +6,28 @@ void testApp::setup(){
     ofSetVerticalSync(true);
     ofEnableSmoothing();
     ofSetCircleResolution(60);
+//    ofSetBackgroundAuto(false);
     
-    ofSetBackgroundAuto(false);
     
-    ofSeedRandom();
-    vel.x = ofRandom(-3,3);
-    vel.y = ofRandom(-5,5);
 
 }
 
 //--------------------------------------------------------------
 void testApp::update(){
     
-    pos += vel;
+    
+
 }
 
 //--------------------------------------------------------------
 void testApp::draw(){
     
-    if(pos.x > ofGetWindowWidth() || pos.x < 0) vel.x *= -1;
-    if(pos.y > ofGetWindowHeight() || pos.y < 0) vel.y *= -1;
-    
-    for (int i = 0; i<20; i++) {
-        ofSetColor(255, 0, 0, 9);
-        ofCircle(pos, 25);
-    }
+    float angle = sin(ofGetElapsedTimef());
+    pts.x += angle;
+    pts.z += 0.06;
 
+    ofSetColor(255,0,0,10);
+    ofRect(pts.x, mouseY, 40*pts.z, 40*pts.z);
     
 }
 
@@ -53,6 +49,9 @@ void testApp::mouseMoved(int x, int y ){
 //--------------------------------------------------------------
 void testApp::mouseDragged(int x, int y, int button){
 
+    ofVec3f temp;
+    temp.x = x;
+    temp.y = y;
     
 
 }
