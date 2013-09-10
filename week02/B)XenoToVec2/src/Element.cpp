@@ -14,7 +14,7 @@ Element::Element(){
     w = 20;
 }
 
-void Element::setup(ofColor _myColor){
+void Element::setup(){
     
 }
 
@@ -26,7 +26,7 @@ void Element::upload(float catchSpeed, ofVec2f catchPos){
 
 void Element::draw(){
     ofNoFill();
-    ofSetColor(myColor,10);
+    ofSetColor(255, 50);
     ofRect(pos.x,pos.y,w,w);
     
 }

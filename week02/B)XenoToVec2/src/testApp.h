@@ -23,7 +23,6 @@ class testApp : public ofBaseApp
         
         Element myElement;
         vector <Element> myElements;
-        ofColor color;
         ofVec2f mousePos;
     float wSize;
 };

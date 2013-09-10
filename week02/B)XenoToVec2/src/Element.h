@@ -7,14 +7,13 @@
 class Element{
     public:
     Element();
-    void setup(ofColor _myColor);
+    void setup();
     void upload(float catchSpeed, ofVec2f catchPos);
     void draw();
     
     
     ofVec2f pos;
     float w;
-    ofColor myColor;
 };
 
 #endif /* defined(__MultipleXeno__Element__) */

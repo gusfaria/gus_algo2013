@@ -26,7 +26,6 @@ void testApp::draw(){
 
     
     for (int i = 0; i < myElements.size(); i++) {
-        myElements[i].myColor = (0, 100, 255);
         myElements[i].draw();
     }
     
@@ -50,7 +49,7 @@ void testApp::keyReleased(int key){
 //--------------------------------------------------------------
 void testApp::mouseMoved(int x, int y ){
     Element tempElement;
-    tempElement.setup(color);
+    tempElement.setup();
     myElements.push_back(tempElement);
 }
 
