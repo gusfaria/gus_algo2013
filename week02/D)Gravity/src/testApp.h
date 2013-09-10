@@ -25,12 +25,7 @@ vector <Element> myElements;
 ofVec2f mousePos;
 
 float gravity;
-
     ofColor color;
-
     bool e,m,j;
-    
     float earthGravity;
-
-		
 };

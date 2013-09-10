@@ -2,7 +2,6 @@
 
 //--------------------------------------------------------------
 void testApp::setup(){
-    ofBackground(0);
     ofSetCircleResolution(60);
     ofSetVerticalSync(true);
 //    gravity = 0.98f;
@@ -28,6 +27,11 @@ void testApp::draw(){
         myElements[i].draw();
         
     }
+    
+    ofDrawBitmapString("ACTUAL GRAVITY : " + ofToString(gravity), ofPoint(10,15));
+    ofDrawBitmapString("PRESS E FOR EARTH'S GRAVITY", ofPoint(10,30));
+    ofDrawBitmapString("PRESS M FOR MOON'S GRAVITY", ofPoint(10,45));
+    ofDrawBitmapString("PRESS J FOR JUPITER'S GRAVITY", ofPoint(10,60));
 }
 
 //--------------------------------------------------------------
@@ -37,12 +41,12 @@ void testApp::keyPressed(int key){
     
     if (key == 'e') {
         gravity = earthGravity;
-        color = ofColor(0,0,255);
+        color = (0,0,255);
     } else if (key == 'j'){
+        color = (255,0,0);
         gravity = 2.48*earthGravity;
-        color = ofColor(255,0,0);
     } else if (key == 'm'){
-        color = ofColor(255);
+        color = (255);
         gravity = earthGravity/6;
     } else {
         gravity = earthGravity/6;

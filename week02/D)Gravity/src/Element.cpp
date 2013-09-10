@@ -1,6 +1,8 @@
 #include "Element.h"
 
 Element::Element (){
+    
+    gravity = 9.8/6;
 
 }
 
