@@ -8,12 +8,13 @@
 class Element{
 public:
     Element();
-    void setup(ofVec2f position, float grav);
+    void setup(ofVec2f position, float grav, ofColor _myColor);
     void update();
     void draw();
     
     ofVec2f pos, vel;
     float gravity;
+    ofColor myColor;
 };
 
 

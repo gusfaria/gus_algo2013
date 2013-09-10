@@ -1,14 +1,14 @@
 #include "Element.h"
 
 Element::Element (){
-    vel.y = 1;
+
 }
 
-void Element:: setup(ofVec2f position, float grav){
+void Element:: setup(ofVec2f position, float grav, ofColor _myColor){
     pos = position;
     gravity = grav;
-
-    
+    vel.y = ofRandom(0,10);
+    myColor = _myColor;
 }
 
 void Element :: update(){
@@ -17,9 +17,11 @@ void Element :: update(){
 }
 
 void Element :: draw(){
+    ofSetColor(myColor);
     ofCircle(pos, 20);
     
     if(pos.y > ofGetWindowHeight()){
+        pos.y = ofGetWindowHeight();
         vel.y *= -1;
     }
 }

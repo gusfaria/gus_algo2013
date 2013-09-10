@@ -26,8 +26,11 @@ ofVec2f mousePos;
 
 float gravity;
 
-ofColor color;
+    ofColor color;
 
+    bool e,m,j;
+    
+    float earthGravity;
 
 		
 };

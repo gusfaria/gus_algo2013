@@ -2,19 +2,17 @@
 
 //--------------------------------------------------------------
 void testApp::setup(){
-    ofBackground(255);
     ofSetVerticalSync(true);
     ofEnableSmoothing();
     ofSetCircleResolution(60);
-//    ofSetBackgroundAuto(false);
-    
-    
+    ofSetBackgroundAuto(false);    
+    ofSetRectMode(OF_RECTMODE_CENTER);
 
 }
 
 //--------------------------------------------------------------
 void testApp::update(){
-    
+
     
 
 }
@@ -22,12 +20,25 @@ void testApp::update(){
 //--------------------------------------------------------------
 void testApp::draw(){
     
-    float angle = sin(ofGetElapsedTimef());
-    pts.x += angle;
-    pts.z += 0.06;
-
-    ofSetColor(255,0,0,10);
-    ofRect(pts.x, mouseY, 40*pts.z, 40*pts.z);
+    ofBackground(0,0,0,90);
+    ofPushMatrix();{
+        
+        for (int i = 0; i < myElements.size(); i++) {
+            myElements[i].draw();
+            
+        }
+        
+//        float angle = sin(ofGetElapsedTimef()*0.5);
+//        element.z += angle;
+//        ofRotate(element.z, mouseX, mouseY,0);
+//        ofNoFill();
+//        ofSetColor(255);
+//        element.x += 6;
+//        element.y += 3;
+//        ofRect(mouseX, mouseY, element.x, element.y);
+    }ofPopMatrix();
+    
+    
     
 }
 
@@ -48,17 +59,15 @@ void testApp::mouseMoved(int x, int y ){
 
 //--------------------------------------------------------------
 void testApp::mouseDragged(int x, int y, int button){
-
-    ofVec3f temp;
-    temp.x = x;
-    temp.y = y;
     
 
 }
 
 //--------------------------------------------------------------
 void testApp::mousePressed(int x, int y, int button){
-
+    Element newElement;
+    newElement.setup(mousePos);
+    myElements.push_back(newElement);
 }
 
 //--------------------------------------------------------------
