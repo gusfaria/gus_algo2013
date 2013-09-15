@@ -7,7 +7,6 @@ void testApp::setup(){
 //    gravity = 0.98f;
     earthGravity = 9.8;
     ofSeedRandom();
-    color = ofRandom(0,255);
 
 }
 
@@ -39,17 +38,33 @@ void testApp::keyPressed(int key){
     
     // change color of each one based on their gravity ???
     
-    if (key == 'e') {
-        gravity = earthGravity;
-        color = (0,0,255);
-    } else if (key == 'j'){
-        color = (255,0,0);
-        gravity = 2.48*earthGravity;
-    } else if (key == 'm'){
-        color = (255);
-        gravity = earthGravity/6;
-    } else {
-        gravity = earthGravity/6;
+//    if (key == 'e') {
+//        gravity = earthGravity;
+//        color = (0,0,255);
+//    } else if (key == 'j'){
+//        color = (255,0,0);
+//        gravity = 2.48*earthGravity;
+//    } else if (key == 'm'){
+//        color = (255);
+//        gravity = earthGravity/6;
+//    } else {
+//        gravity = earthGravity/6;
+//    }
+    
+    
+    switch (key) {
+        case 'e':
+            gravity = earthGravity;
+            ofSetColor(255, 0, 0);
+            break;
+        case 'j':
+            gravity = 2.48*earthGravity;
+            break;
+        case 'm':
+            gravity = earthGravity/6;
+            break;
+        default:
+            break;
     }
     
 }

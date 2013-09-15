@@ -22,8 +22,8 @@ void Element :: draw(){
     ofSetColor(myColor);
     ofCircle(pos, 20);
     
-    if(pos.y > ofGetWindowHeight()){
-        pos.y = ofGetWindowHeight();
+    if(pos.y > ofGetWindowHeight()-20){
+        pos.y = ofGetWindowHeight()-20;
         vel.y *= -1;
     }
 }
