@@ -16,6 +16,7 @@ void testApp::update(){
 
 //--------------------------------------------------------------
 void testApp::draw(){
+    
     float angle = ofGetElapsedTimef()   * 3.5;
     float radius = 200;
     
