@@ -21,4 +21,7 @@ class testApp : public ofBaseApp{
         ofPoint pos;
         vector  <ofPoint>   pointList;
         float radius;
+    
+        float angleAdder;
+
 };

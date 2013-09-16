@@ -47,12 +47,11 @@ void testApp::draw(){
             ofRotateZ(ofGetElapsedTimef() * -5.0*i);
             ofNoFill();
             ofSetColor(255*0.05*i,0,255,30);
-            ofRect(x,0,30*i,30*i);
+            ofRect(x,y,30*i,30*i);
         }ofPopMatrix();
     }
     
-        ofBackgroundGradient(ofColor(10,40,80,10), ofColor(0, 0, 0,10), OF_GRADIENT_CIRCULAR); // make a cool gradient
-    
+        ofBackgroundGradient(ofColor(10,40,80,10), ofColor(255, 0, 50,10), OF_GRADIENT_CIRCULAR);
     
 //    ofPushMatrix();{
 //        ofSetRectMode(OF_RECTMODE_CORNER);
