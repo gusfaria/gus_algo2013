@@ -6,6 +6,8 @@ void testApp::setup(){
     ofBackground(0);
     bIsRecording = false;
     playBackStartTime = 0;
+    ofSetBackgroundAuto(false);
+    ofEnableAlphaBlending();
     
 }
 
@@ -17,23 +19,26 @@ void testApp::update(){
 
 //--------------------------------------------------------------
 void testApp::draw(){
+
     
     //draw the line
-    ofSetColor(ofColor::lime);
-    ofNoFill();
-    ofBeginShape();{
-        for( vector<TimePoint>::iterator it = points.begin(); it != points.end(); it++){
-            ofVertex(it->x, it->y);
-        }
-    }ofEndShape();
+//    ofSetColor(ofColor::lime);
+//    ofNoFill();
+//    ofBeginShape();{
+//        for( vector<TimePoint>::iterator it = points.begin(); it != points.end(); it++){
+//            ofVertex(it->x, it->y);
+//        }
+//    }ofEndShape();
     
     // draw the playback
     if(bIsRecording == false){
     ofPoint pos = getPositionForTime(ofGetElapsedTimef() - playBackStartTime);
     ofFill();
-    ofSetColor(ofColor::orangeRed);
-    ofCircle(pos.x, pos.y, 10);
+    ofSetColor(ofColor::orangeRed,50);
+    ofCircle(pos.x, pos.y, 40);
     }
+    ofSetColor(ofColor::limeGreen, 5);
+        ofRect(0, 0, ofGetWindowWidth(), ofGetWindowHeight());
 }
 
 //--------------------------------------------------------------

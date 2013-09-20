@@ -25,6 +25,8 @@ class testApp : public ofBaseApp{
     
     float angleAdder;
     float angle;
+    ofPoint pos;
+    float velX;
     
     void wave(float angleBase, float vel, int amp, int rectW, int rect);
 	

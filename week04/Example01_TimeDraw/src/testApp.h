@@ -26,3 +26,6 @@ class testApp : public ofBaseApp{
     bool    bIsRecording;
     ofPoint getPositionForTime( float time );
 };
+
+// screenflow
+// voila
