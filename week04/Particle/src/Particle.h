@@ -14,14 +14,19 @@
 
 class Particle{
 public:
-    Particle();
-    void setup();
-    void update();
+    Particle(){};
+    void setup( ofVec2f rVel, ofPoint position );
+    void update( ofPoint position );
     void draw();
     
     ofVec2f pos;
     ofVec2f vel;
+    int age, lifespan;
     bool bIsDead;
+    
+    
+    
+
     
 };
 
