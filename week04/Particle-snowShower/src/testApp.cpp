@@ -68,18 +68,21 @@ void testApp::draw(){
 //        }ofEndShape();
 //    }ofPopMatrix();
     
-    
-    
-    ofPushMatrix();{
-        ofTranslate(ofGetWindowWidth() / 2, 0);
-        myPos.x = sin(ofGetElapsedTimef() * 10)*5;
-        ofCircle(myPos.x, myPos.y, 5);
-    }ofPopMatrix();
+//    ofPushMatrix();{
+//        ofTranslate(ofGetWindowWidth() / 2, 0);
+//        myPos.x = sin(ofGetElapsedTimef() * 10)*5;
+//        ofCircle(myPos.x, myPos.y, 5);
+//    }ofPopMatrix();
     
 
     //put the particles in the loop?
     for( vector<Particle>::iterator it = pList.begin(); it!=pList.end(); it++){
         it->draw();
+    }
+    
+
+    for( int i=0; i<50; i++ ){
+        addParticle();
     }
     
     
@@ -122,9 +125,7 @@ void testApp::mouseDragged(int x, int y, int button){
 
 //--------------------------------------------------------------
 void testApp::mousePressed(int x, int y, int button){
-    for( int i=0; i<50; i++ ){
-        addParticle();
-    }
+
 }
 
 //--------------------------------------------------------------

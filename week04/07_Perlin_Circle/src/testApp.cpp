@@ -17,8 +17,7 @@ void testApp::update(){
 void testApp::draw(){
 //    ofBackground(0,0,0,5);
 
-    ofSetColor(255,0,127,20
-               );
+    ofSetColor(100,255,10,20);
     
     ofPushMatrix();{
         ofTranslate( ofGetWindowSize() / 2);
