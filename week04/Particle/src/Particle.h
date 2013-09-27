@@ -15,18 +15,20 @@
 class Particle{
 public:
     Particle(){};
-    void setup( ofVec2f rVel, ofPoint position );
-    void update( ofPoint position );
+    void setup(ofVec2f _Pos, float velMult, float hue);
+    void update();
     void draw();
-    
+    bool bIsDied();
+
     ofVec2f pos;
     ofVec2f vel;
-    int age, lifespan;
-    bool bIsDead;
+    ofVec2f acc;
+    ofColor color;
     
+    float size;
+    float age;
+    float life;
     
-    
-
     
 };
 

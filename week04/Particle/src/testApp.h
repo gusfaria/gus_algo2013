@@ -2,6 +2,8 @@
 
 #include "ofMain.h"
 #include "Particle.h"
+#include "Bomb.h"
+
 
 class testApp : public ofBaseApp{
 
@@ -20,11 +22,11 @@ class testApp : public ofBaseApp{
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
     
-    void addParticle();
-    vector<Particle> pList;
+    void addParticle(ofVec2f pos, float velMult, float hue);
+    vector<Particle> myParticle;
+    vector<Bomb>particleList;
+
     
-    ofPoint myPos;
-    ofPoint myVel;
     
     
 };
