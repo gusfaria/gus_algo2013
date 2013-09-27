@@ -12,14 +12,18 @@
 Bomb::Bomb(){
     pos.x = ofRandom(ofGetWindowWidth());
     pos.y = ofGetWindowHeight();
-    vel.y = ofRandom(-25.0, -10.0);
+    vel.y = ofRandom(-20.0, -8.0);
     initVel = vel.y;
-    color.setHsb(ofRandom(255), 255, 255);
-    size = ofRandom(5.0, 10.0);
+    color.setHsb(ofRandom(255), 200, 200);
+    size = ofRandom(2.0, 5.0);
 }
 
-void Bomb::update(){
-    vel *= 0.96;
+void Bomb::update(float velX){
+    
+    vel.y *= 0.98;
+//    vel.x = (sin(ofGetElapsedTimef()*0.5));
+    vel.x = velX;
+    
     pos += vel;
 }
 
@@ -29,7 +33,7 @@ void Bomb::draw(){
 }
 
 bool Bomb::bExploded(){
-    if (abs(vel.y) <= 10.0) {
+    if (abs(vel.y) <= 2.0) {
         return true;
     }
     else {

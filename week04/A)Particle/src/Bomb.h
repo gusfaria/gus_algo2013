@@ -2,7 +2,7 @@
 //  Bomb.h
 //  Particle
 //
-//  Created by Gustavo Faria on 27/09/13.
+//  Created by Gustavo Faria & Owen on 27/09/13.
 //
 //
 
@@ -12,7 +12,7 @@ class Bomb{
 public:
     Bomb();
     void setup();
-    void update();
+    void update(float velX);
     void draw();
     bool bExploded();
     

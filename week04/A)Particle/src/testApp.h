@@ -24,9 +24,13 @@ class testApp : public ofBaseApp{
     
     void addParticle(ofVec2f pos, float velMult, float hue);
     vector<Particle> myParticle;
-    vector<Bomb>particleList;
+    vector<Bomb>myBomb;
 
     
     
     
 };
+
+
+
+// OWEN HELPED ME BIG TIME!!!!!

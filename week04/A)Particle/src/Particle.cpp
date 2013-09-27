@@ -10,7 +10,7 @@ void Particle::setup(ofVec2f _Pos, float velMult, float hue){
 //    vel.set(ofRandom(-2,2) * 5, ofRandom(-2,2) * 5);
     acc.y = 0.5;
     size = ofRandom(2,5);
-    color.setHsb(200,  ofRandom(100), ofRandom(255));
+    color.setHsb(hue,  ofRandom(255), ofRandom(255));
     
     vel.x = ofRandom(-velMult / 2.0, velMult / 2.0);
     vel.y = ofRandom(-velMult / 2.0, velMult / 2.0 + 1.0);

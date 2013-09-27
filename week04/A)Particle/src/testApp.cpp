@@ -17,9 +17,9 @@ void testApp::setup(){
 
 //--------------------------------------------------------------
 void testApp::update(){
-    if (ofGetElapsedTimeMillis() % 10 == 0) {
+    if (ofGetElapsedTimeMillis() % 20 == 0) {
         Bomb tmp;
-        particleList.push_back( tmp );
+        myBomb.push_back( tmp );
     }
     
     
@@ -35,15 +35,17 @@ void testApp::update(){
         }
     }
     
-    for ( int i = 0; i < particleList.size(); i++ ) {
-        particleList[i].update();
+    float velX = (sin(ofGetElapsedTimef()*ofRandom(10,20))*ofRandom(0.5,0.9));
+
+    for ( int i = 0; i < myBomb.size(); i++ ) {
+        myBomb[i].update(velX);
         
-        if (particleList[i].bExploded()) {
+        if (myBomb[i].bExploded()) {
             for ( int k = 0; k < 100; k ++ ) {
-                addParticle(particleList[i].pos, particleList[i].initVel, particleList[i].color.getHue());
+                addParticle(myBomb[i].pos, myBomb[i].initVel, myBomb[i].color.getHue());
             }
             
-            particleList.erase(particleList.begin() + i);
+            myBomb.erase(myBomb.begin() + i);
         }
     }
     
@@ -53,7 +55,7 @@ void testApp::update(){
 
 //--------------------------------------------------------------
 void testApp::draw(){
-    ofSetColor(0, 0, 0,10);
+    ofSetColor(0, 0, 0,50);
     ofRect(0,0,ofGetWindowWidth(), ofGetWindowHeight());
     ofDrawBitmapStringHighlight(ofToString(myParticle.size()), ofPoint(30,50));
     
@@ -61,10 +63,10 @@ void testApp::draw(){
         it->draw();
     }
     
-    for( int i = 0; i > particleList.size(); i++){
-        ofSetColor(255,0,0);
-        particleList[i].draw();
+    for( int i = 0; i < myBomb.size(); i++){
+        myBomb[i].draw();
     }
+
 }
 
 
@@ -99,8 +101,8 @@ void testApp::mouseDragged(int x, int y, int button){
 
 //--------------------------------------------------------------
 void testApp::mousePressed(int x, int y, int button){
-    Bomb tmp;
-    particleList.push_back( tmp );
+//    Bomb tmp;
+//    myBomb.push_back( tmp );
     
 }
 
