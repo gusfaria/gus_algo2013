@@ -12,7 +12,7 @@
 
 class Particle{
 public:
-    Particle();
+    Particle(float particleSize, ofColor _color);
     
     void update();
     void draw();
@@ -30,5 +30,6 @@ public:
     
     float pSize;
     ofImage bubble;
-
+    bool bColor;
+    ofColor color;
 };

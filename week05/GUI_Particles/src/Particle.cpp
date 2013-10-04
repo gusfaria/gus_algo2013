@@ -6,13 +6,14 @@
 
 #include "Particle.h"
 
-Particle::Particle(){
+Particle::Particle(float particleSize, ofColor _color){
     
     setParams(0,0,0,0);
-    pSize = 20;
+    pSize = particleSize;
     damping = ofVec2f(0, 0.01);
-    
     bubble.loadImage("bubble.png");
+    
+    color = _color;
 
 }
 
@@ -39,9 +40,12 @@ void Particle::update(){
     vel = vel + frc;
     pos = pos + vel;
     
+
+    
 }
 
 void Particle::draw(){
 //    ofCircle( pos.x,pos.y, pSize );
+    ofSetColor(color);
     bubble.draw(pos.x, pos.y, pSize,pSize);
 }

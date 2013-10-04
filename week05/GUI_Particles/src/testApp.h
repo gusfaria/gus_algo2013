@@ -1,7 +1,7 @@
 #pragma once
 
 #include "ofMain.h"
-//#include "ofxUI.h"
+#include "ofxUI.h"
 #include "Particle.h"
 
 
@@ -22,12 +22,20 @@ class testApp : public ofBaseApp{
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
     
-    
-//        void onGuiEvent( ofxUIEventArgs &e );
-//        void exit();
+        void onGuiEvent( ofxUIEventArgs &e );
+        void exit();
         void addParticle();
     
-//        vector <Particle> particleList;
-//        ofxUICanvas *gui;
-
+        vector <Particle> particleList;
+        ofxUICanvas *gui;
+    
+        float pSize;
+        float quantity;
+        ofColor color;
 };
+
+
+// como n‹o deletar as bolhas quando mousePressed
+// colocar os switches funcionando
+// colcoar um if statemente para a bolha n‹o sair da tela
+// contato entre as bolhas
