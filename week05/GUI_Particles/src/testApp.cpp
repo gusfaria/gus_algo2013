@@ -82,7 +82,7 @@ void testApp::update(){
         particleList[i].addDampingForce();
         particleList[i].update();
         
-        if (particleList.size()>700) {
+        if (particleList.size()>200) {
             particleList.erase(particleList.begin());
         }
     }
@@ -90,7 +90,10 @@ void testApp::update(){
 
 //--------------------------------------------------------------
 void testApp::draw(){
-
+    float list = particleList.size();
+    cout << list << endl;
+                     
+    
     ofSetColor(color);
     for (int i=0; i < particleList.size(); i++){
         particleList[i].draw();
