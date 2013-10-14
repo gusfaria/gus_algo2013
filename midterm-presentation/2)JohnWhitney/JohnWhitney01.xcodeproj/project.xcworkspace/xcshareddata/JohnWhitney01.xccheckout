@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>095D9C40-F167-4F21-866C-018EB67E6283</string>
+	<key>IDESourceControlProjectName</key>
+	<string>JohnWhitney01</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>F6CA7396-AC21-43AA-B9C2-0D2D7828860E</key>
+		<string>https://github.com/gusfaria/algo2013Gus.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>week03/A)JohnWhitney02/JohnWhitney01.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>F6CA7396-AC21-43AA-B9C2-0D2D7828860E</key>
+		<string>../../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/gusfaria/algo2013Gus.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>F6CA7396-AC21-43AA-B9C2-0D2D7828860E</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>F6CA7396-AC21-43AA-B9C2-0D2D7828860E</string>
+			<key>IDESourceControlWCCName</key>
+			<string>gus_algo2013</string>
+		</dict>
+	</array>
+</dict>
+</plist>
