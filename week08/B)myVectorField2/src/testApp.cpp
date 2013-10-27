@@ -45,6 +45,12 @@ void testApp::draw(){
         ofSetColor(color);
         particleList[i].draw();
     }
+    
+    ofDrawBitmapStringHighlight("Press p for Perlin", 10,10);
+    ofDrawBitmapStringHighlight("Press r for random Perlin", 10,25);
+    ofDrawBitmapStringHighlight("Press m for Mouse interference", 10,40);
+    ofDrawBitmapStringHighlight("Press b to see the vector field", 10,55);
+    ofDrawBitmapStringHighlight("Press i for img vector field", 10,70);
 }
 
 //--------------------------------------------------------------
