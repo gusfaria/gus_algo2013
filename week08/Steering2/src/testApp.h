@@ -1,6 +1,7 @@
 #pragma once
 
 #include "ofMain.h"
+#include "Particle.h"
 
 class testApp : public ofBaseApp{
 
@@ -18,5 +19,8 @@ class testApp : public ofBaseApp{
 		void windowResized(int w, int h);
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
-		
+    
+        ofVec2f dest;
+        ofVec2f pos, vel;
+        Particle car;
 };
