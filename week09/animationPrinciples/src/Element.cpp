@@ -10,7 +10,9 @@
 
 
 Element::Element(){
-    color.setHsb(150, 244, 255);
+//    color.setHsb(150, 244, 255);
+    color.setHsb(150, 24, 20);
+
     vel.y = 12;
     pos.set(ofGetWindowWidth() / 2- 100, ofGetWindowHeight() + 100);
     acc = 0.98;
@@ -35,8 +37,12 @@ void Element::draw(){
 //    color = _color;
     //rectSize = ;
     ofSetRectMode(OF_RECTMODE_CENTER);
+    ofSetColor(color - 10);
+    ofRect(pos+10, rectSize + increment, rectSize + increment);
     ofSetColor(color);
     ofRect(pos, rectSize + increment, rectSize + increment);
+
+
 
 }
 

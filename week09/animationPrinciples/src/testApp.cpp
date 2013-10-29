@@ -6,11 +6,7 @@ void testApp::setup(){
     ofSetVerticalSync(true);
     ofBackground(0, 0, 0);
 
-    color2.setHsb(200,244,255);
-    
-    
-  
-  
+//    color2.setHsb(200,244,255);
     
     counter = 0;
     startTime = 0;
@@ -25,8 +21,6 @@ void testApp::setup(){
 
 //--------------------------------------------------------------
 void testApp::update(){
-
-
     
     if(time > 5) {
         for(int k = 0; k <  200; k ++){
@@ -44,32 +38,22 @@ void testApp::update(){
         
         if(time > 6) {
             Elements[i].reset();
-            counter = 0;
             Elements.erase(Elements.begin());
-            
-            
-//            if(bBg){
-//                ofBackground(0);
-//            } else {
-//                ofBackground(230, 230, 230);
-//            }
-
+            counter = 0;
         }
     }
     
-
+    time = ofGetElapsedTimef() - startTime;
     
     if (counter < 52) counter++;
     if (counter % 10 == 0 && counter < 50) {
         Element tmp;
-        color.setHsb(200,244,255);
+//        color.setHsb(200,244,255);
         tmp.setup( );
         Elements.push_back( tmp );
     }
-
     
-    time = ofGetElapsedTimef() - startTime;
-
+    cout << Elements.size() << endl;
 
 }
 
@@ -79,7 +63,7 @@ void testApp::draw(){
 
     for (int i = 0; i < Elements.size(); i++) {
 
-        cout << Elements[2].increment << endl;
+//        cout << Elements[2].increment << endl;
         Elements[i].pos.x = 480 + 110*i ;
         Elements[i].draw( );
         
