@@ -1,6 +1,7 @@
 #pragma once
 
 #include "ofMain.h"
+#include "Element.h"
 
 class testApp : public ofBaseApp{
 
@@ -19,4 +20,16 @@ class testApp : public ofBaseApp{
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
 		
+
+    vector <Element> Elements;
+
+    ofColor color, color2;
+    int counter;
+    int startTime, time;
+    bool bBg;
 };
+
+
+
+//change setColor and background color (create bool)
+// fix the extra rect being created

@@ -29,12 +29,9 @@ void testApp::draw(){
     ofEllipse(pos, ball.x,ball.y);
     
     if(pos.y > ofGetWindowHeight()-30){
-//        ball.y = 30;
-//        ball.x = 70;
+
         pos.y = ofGetWindowHeight()-30;
         velY *= -1;
-//        ball.y = 50;
-//        ball.x = 50;
     }
 
 }
