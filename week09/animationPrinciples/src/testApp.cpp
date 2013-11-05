@@ -37,9 +37,10 @@ void testApp::update(){
         Elements[i].update();
         
         if(time > 6) {
-            Elements[i].reset();
-            Elements.erase(Elements.begin());
+            Elements.clear();
             counter = 0;
+            Element tmp;
+            Elements.push_back( tmp );
         }
     }
     
@@ -48,7 +49,7 @@ void testApp::update(){
     if (counter < 52) counter++;
     if (counter % 10 == 0 && counter < 50) {
         Element tmp;
-//        color.setHsb(200,244,255);
+        color.setHsb(200,244,255);
         tmp.setup( );
         Elements.push_back( tmp );
     }

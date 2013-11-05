@@ -30,6 +30,8 @@ class testApp : public ofBaseApp{
 };
 
 
-
+//re do this code!!!
+// create small functions
 //change setColor and background color (create bool)
 // fix the extra rect being created
+//look for tweens!!!! arturo's
