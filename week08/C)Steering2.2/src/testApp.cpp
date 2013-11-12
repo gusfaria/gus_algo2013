@@ -25,7 +25,7 @@ void testApp::update(){
     car2.seek( dest2 );
     
     if( car2.pos.distance( car1.pos ) < 200 ){
-        //WHY THIS IS NOT WORKING???????????????????????
+
         car1.addRepulsionForce(car2.pos);
         car2.addRepulsionForce(car1.pos);
         color1.set(ofColor::red);

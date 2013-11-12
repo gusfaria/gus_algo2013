@@ -69,7 +69,14 @@ void Particles:: update(){
 
 
 void Particles:: draw(){
+
+    ofNoFill();
+    ofSetColor(0);
+    ofCircle(pos, size);
+    ofFill();
+    
     ofSetColor(color);
     ofCircle( pos , size );
+
 }
 

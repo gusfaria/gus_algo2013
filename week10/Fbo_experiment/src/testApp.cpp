@@ -51,11 +51,11 @@ void testApp::draw(){
         ofPushMatrix();{
             ofBackground(0);
             ofColor color;
-            color.setHsb(ofRandom(255), 255, 250);
+
             for (int i = 0; i < particleList.size(); i++) {
+                color.setHsb(ofRandom(255), 255, 250);
                 particleList[i].draw();
             }
-            
             ofScale (.5f,.5f, 3);
         }ofPopMatrix();
     }mirrorFbo.end();
@@ -64,6 +64,10 @@ void testApp::draw(){
     // FIRST QUADRANT
     ofPushMatrix();{
 //        ofTranslate(0, 0);
+        ofSetRectMode(OF_RECTMODE_CENTER);
+        ofTranslate(ofGetWindowWidth()/2, ofGetWindowHeight()/2);
+        ofRotateZ(180);
+        ofSetRectMode(OF_RECTMODE_CORNER);
 //        ofScale(1, 1, 1);
 //        ofSetColor(ofColor::saddleBrown);
         ofRect(0, 0, ofGetWindowWidth(), ofGetWindowHeight());

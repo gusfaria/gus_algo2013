@@ -15,7 +15,7 @@ Particle::Particle(){
     
     maxSpeed = 10.0;
     maxForce = 0.4;
-    slowDownRadius = 200.0;
+    slowDownRadius = 400.0;
     
 }
 
@@ -34,7 +34,7 @@ void Particle::addForce(ofVec2f force){
 }
 
 void Particle::addRepulsionForce (const ofVec2f &fromPos){
-    ofVec2f diff = fromPos - pos;
+    ofVec2f diff =  pos - fromPos;
     float strength = 1.0f - (diff.length() / 200.0f);
     addForce( diff.normalized() * strength );
 }
@@ -47,14 +47,15 @@ void Particle::seek( const ofVec2f &dest ){
     
     if(dest.length() < slowDownRadius){
         float newMag = ofMap( desired.length(), 0, slowDownRadius, 0, maxSpeed);
-        desired.normalize(); // why I need normalize? and when to use it?
+        desired.normalize();
         desired *= newMag;
     } else {
-        desired.normalize(); // why I need normalize? and when to use it?
+        desired.normalize();
         desired *= maxSpeed;
     }
     
     ofVec2f steer = desired - vel;
+    steer.limit(maxForce);
     cout << "steer :: " <<  steer << endl;
     
     addForce(steer);
