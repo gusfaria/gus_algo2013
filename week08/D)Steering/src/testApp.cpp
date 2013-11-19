@@ -68,10 +68,10 @@ void testApp::update(){
 
 //--------------------------------------------------------------
 void testApp::draw(){
-//    
-//        ofSetColor(0, 0, 0, 10);
-//        ofRect(0,0,ofGetWindowWidth(),ofGetWindowHeight());
-//    ofBackground(0, 0, 0, 10);
+    
+        ofSetColor(0, 0, 0, 10);
+        ofRect(0,0,ofGetWindowWidth(),ofGetWindowHeight());
+    ofBackground(0, 0, 0, 10);
     ofBackgroundGradient(ofColor(33,121,209,10), ofColor(50, 0, 0,10), OF_GRADIENT_CIRCULAR);
     
         for (int i = 0; i<particleList.size(); i++) {
@@ -83,10 +83,10 @@ void testApp::draw(){
             ofSetColor(0, 255, 0);
             particleListPart2[k].draw();
         }
-//    ofSetColor(0, 0, 0, 10);
-//    ofCircle(dest, 10);
-//    ofSetColor(255, 255, 255, 90);
-//    ofCircle(dest2, 10);
+    ofSetColor(0, 0, 0, 10);
+    ofCircle(dest, 10);
+    ofSetColor(255, 255, 255, 90);
+    ofCircle(dest2, 10);
 }
 
 //--------------------------------------------------------------
