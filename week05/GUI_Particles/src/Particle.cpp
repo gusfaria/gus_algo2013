@@ -12,7 +12,6 @@ Particle::Particle(float particleSize, ofColor _color){
     pSize = particleSize;
     damping = ofVec2f(0, 0.01);
     bubble.loadImage("bubble.png");
-    
     color = _color;
 
 }

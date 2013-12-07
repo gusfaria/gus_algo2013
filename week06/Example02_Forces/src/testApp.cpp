@@ -23,7 +23,6 @@ void testApp::update(){
     for (int i=0; i<particleList.size(); i++) {
         particleList[i].applyForce( gravity * particleList[i].mass);
         particleList[i].applyForce( wind );
-        
         particleList[i].update();
     }
     

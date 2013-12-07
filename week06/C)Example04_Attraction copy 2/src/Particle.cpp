@@ -22,7 +22,6 @@ Particle::Particle(){
 
 void Particle::update(){
     vel += acc * sin(ofGetElapsedTimef() * 5);
-
     vel += acc * 5;
     pos += vel;
     

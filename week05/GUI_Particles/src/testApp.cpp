@@ -130,7 +130,7 @@ void testApp:: addParticle(){
 
 //--------------------------------------------------------------
 void testApp::keyPressed(int key){
-
+    if(key == 't') ofToggleFullscreen();
 }
 
 //--------------------------------------------------------------

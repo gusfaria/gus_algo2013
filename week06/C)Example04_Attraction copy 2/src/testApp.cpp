@@ -18,7 +18,7 @@ void testApp::setup(){
         
         
             float x = ofMap(i,0,1500, 0,ofGetWidth());
-        float y = ofMap(i, 0, 1500, 0, ofGetHeight());
+            float y = ofMap(i, 0, 1500, 0, ofGetHeight());
             p.pos.x = i+x;
             p.pos.y = i+y;
             
