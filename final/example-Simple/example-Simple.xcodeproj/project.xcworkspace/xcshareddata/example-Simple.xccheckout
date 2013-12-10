@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>232929CA-74AF-4204-A3E3-32984D554E13</string>
+	<key>IDESourceControlProjectName</key>
+	<string>example-Simple</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>0171AA7F-BD19-49E5-8886-5ADB05A542C1</key>
+		<string>https://github.com/vanderlin/ofxBox2d.git</string>
+		<key>64A17061-502D-4569-BDFD-209B1B664304</key>
+		<string>https://github.com/gusfaria/algo2013Gus.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>final/example-Simple/example-Simple.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>0171AA7F-BD19-49E5-8886-5ADB05A542C1</key>
+		<string>../../../../../addons/ofxBox2d</string>
+		<key>64A17061-502D-4569-BDFD-209B1B664304</key>
+		<string>../../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/gusfaria/algo2013Gus.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>64A17061-502D-4569-BDFD-209B1B664304</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>64A17061-502D-4569-BDFD-209B1B664304</string>
+			<key>IDESourceControlWCCName</key>
+			<string>gus_algo2013</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>0171AA7F-BD19-49E5-8886-5ADB05A542C1</string>
+			<key>IDESourceControlWCCName</key>
+			<string>ofxBox2d</string>
+		</dict>
+	</array>
+</dict>
+</plist>

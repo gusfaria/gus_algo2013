@@ -43,9 +43,6 @@ public:
 
 // if(the size of the mouth is small than the previous size of the mouth && the particle is in side the radius (range) ){ the particle disapears }
 
-// fireflies
-
-
 // make the frog move
 // make it as pointers
 // toggle facemask

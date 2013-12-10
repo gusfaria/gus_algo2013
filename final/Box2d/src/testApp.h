@@ -3,21 +3,31 @@
 #include "ofMain.h"
 #include "ofxBox2d.h"
 
-//particles
 class Particle : public ofxBox2dCircle {
 public:
-	Particle() {}
-	ofColor color;
+    Particle() {
+        pizza.loadImage("pizza.png");
+    }
+    
+    
+    ofColor color;
+    ofImage pizza;
     
 	void draw() {
-		float radius = getRadius();
+		float radius = 30;
         float rotation = getRotation();
 		ofPushMatrix();{
             ofTranslate(getPosition().x, getPosition().y, 0);
             ofRotate(rotation);
-            ofSetColor(color.r, color.g, color.b);
+            
+            ofSetColor(color);
             ofFill();
-            ofCircle(0, 0, radius);
+            pizza.draw(0,0, radius);
+            ofPushStyle();
+            ofSetRectMode(OF_RECTMODE_CENTER);
+            ofSetColor(255, 0, 0);
+            ofCircle(0, 0, 30);
+            ofPopStyle();
 		}ofPopMatrix();
 		
 	}
@@ -25,9 +35,10 @@ public:
 
 class RectParticle : public ofxBox2dRect {
 public:
-	RectParticle() {}
-	ofColor color;
-
+	RectParticle() {
+        hotdog.loadImage("hotdog.png");
+    }
+    ofImage hotdog;
 	void draw() {
         float rSizeW = getWidth();
         float rSizeH = getHeight();
@@ -35,11 +46,37 @@ public:
 		ofPushMatrix();{
             ofTranslate(getPosition().x, getPosition().y, 0);
             ofRotate(rotation);
-            ofSetColor(color);
+            ofPushStyle();
+            ofSetColor(0, 255, 0);
+            ofRect(0, 0, rSizeW, rSizeH);
+            ofPopStyle();
+            ofSetColor(255);
             ofFill();
-            ofRect(0, 0, rSizeW,rSizeH);
+            hotdog.draw(0, 0, rSizeW,rSizeH);
+
 		}ofPopMatrix();
-		
+	}
+};
+
+class SquareParticle : public ofxBox2dRect {
+public:
+	SquareParticle() {
+        burger.loadImage("burger.png");
+    }
+    ofImage burger;
+	void draw() {
+        float squareSize = getWidth();
+        float rotation = getRotation();
+		ofPushMatrix();{
+            ofTranslate(getPosition().x, getPosition().y, 0);
+            ofRotate(rotation);
+            ofPushStyle();
+            ofSetColor(0, 0, 255);
+            ofRect(0, 0, squareSize, squareSize);
+            ofPopStyle();
+            ofSetColor(255);
+            burger.draw(0,0,squareSize,squareSize);
+		}ofPopMatrix();
 	}
 };
 
@@ -63,7 +100,8 @@ public:
 	ofxBox2d						box2d;
 	vector		<ofxBox2dCircle>	circles;
 	vector		<ofxBox2dRect>		boxes;
-	vector		<Particle>	particles;
-    vector      <RectParticle> rectlist;
+	vector		<Particle>      particles;
+    vector      <RectParticle>  rectlist;
+    vector      <SquareParticle>  sqrlist;
     
 };
