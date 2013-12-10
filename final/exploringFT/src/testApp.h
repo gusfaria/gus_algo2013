@@ -25,4 +25,7 @@ public:
 	ofMatrix4x4 pose;
 	
 	ofEasyCam easyCam;
+    
+    float catchUpSpeed;
+
 };
