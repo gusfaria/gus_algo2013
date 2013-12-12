@@ -22,6 +22,8 @@ public:
     float friction;
     
     ofVec2f pos, vel, acc;
+    
+    ofImage pizza;
 
     
 };

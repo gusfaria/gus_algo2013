@@ -10,45 +10,14 @@ using namespace cv;
 #include "Particles.h"
 
 
-class Particle : public ofxBox2dCircle {
-public:
-    Particle() {
-        pizza.loadImage("pizza.png");
-    }
-    
-    
-    ofColor color;
-    ofImage pizza;
-    
-	void draw() {
-		float radius = 30;
-        float rotation = getRotation();
-		ofPushMatrix();{
-            ofTranslate(getPosition().x, getPosition().y, 0);
-            ofRotate(rotation);
-            
-            ofSetColor(color);
-            ofFill();
-            pizza.draw(0,0, radius);
-            ofPushStyle();
-            ofTranslate(30,15);
-            ofSetColor(255, 0, 0);
-            ofCircle(0, 0, 30);
-            ofPopStyle();
-		}ofPopMatrix();
-		
-	}
-};
-
-
-
-
 class testApp : public ofBaseApp {
 public:
 	void setup();
 	void update();
 	void draw();
 	void keyPressed(int key);
+    void mousePressed(int x, int y, int button);
+
 	
 	ofVideoGrabber cam;
 	ofxFaceTracker tracker;
@@ -62,22 +31,23 @@ public:
 	
 	ofEasyCam easyCam;
     
-    ofVec2f eatterPos;
-    float eatterRadius;
+    vector<Particles> particleList;
+    
+    ofVec2f myPos;
+    ofVec2f trackerPosMapped, trackerPos;
+    float fat;
+    
+    float mouthRadius;
     ofVec2f prevMouth;
     float mouth_width;
     float mouth_height;
     
-    bool bCam;
+    
+    //game mechanics
     int score;
+    int counter;
+    int stage;
     
-    //box2d
-    ofxBox2d						box2d;
-	vector		<ofxBox2dCircle>	circles;
-	vector		<ofxBox2dRect>		boxes;
-	vector		<Particle>      particles;
-
-    ofxBox2dCircle circle;
-    
-    
+    //debug
+    bool bCam;
 };

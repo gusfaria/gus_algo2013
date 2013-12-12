@@ -5,51 +5,33 @@ using namespace ofxCv;
 //--------------------------------------------------------------
 void testApp::setup() {
     
-    
-    ofBackground( 255 );
-//	ofSetVerticalSync(true);
-//    ofSetFrameRate(60);
+    ofBackground( 251, 146, 64 );
+	ofSetVerticalSync(true);
+    ofSetFrameRate(60);
     ofEnableAlphaBlending();
 	ofSetDrawBitmapMode(OF_BITMAPMODE_MODEL_BILLBOARD);
     ofSetCircleResolution(60);
-
-    ofSetLogLevel(OF_LOG_NOTICE);
     
-    //    box2d
-    box2d.init();
-	box2d.setGravity(10, 0);
-	box2d.setFPS(30.0);
-    box2d.enableGrabbing();
-    
-    //pizza
-    for ( int i = 0; i < 30; i ++ ) {
-        float r = 30;
-		Particle p;
-		p.setPhysics(10, 0.1, 0.1);
-		p.setup(box2d.getWorld(), ofRandom(ofGetWindowWidth()), ofRandom(50), r);
-        p.color.set(250);
-//        p.setPosition(ofRandomWidth(), ofRandomHeight());
-        
-//        ofVec2f veltemp;
-//        float neg = (int)ofRandom(2);
-//        if (neg == 1)   veltemp.set(ofRandom(-4, -2), ofRandom(-4, -3)) ;
-//        else veltemp.set(ofRandom(1, 2), ofRandom(1, 2));
-//        p.setVelocity(veltemp);
-//        p.setDamping(1.0);
-		particles.push_back(p);
-    }
-//    
-//    circle.setPhysics(10, 0.5, 0.5);
-//    circle.setup(box2d.getWorld(), 200, 200, 30);
-	
 	cam.initGrabber(320, 240);
 	
 	tracker.setup();
+    mouthRadius = 40;
     
-    eatterPos.x = ofGetWindowWidth()/2;
-    eatterPos.y = ofGetWindowHeight()/2;
-    eatterRadius = 40;
     
+    //particle
+    for (int i = 0; i < 50; i++){
+        Particles p;
+        p.pos.set(ofRandomWidth(), ofRandomHeight());
+        particleList.push_back(p);
+    }
+
+    //tracker movimentation
+    fat = 0.01f;
+    myPos.set(ofGetWindowWidth()/2,ofGetWindowHeight()/2);
+    
+    //game mechanics
+    stage = 0;
+    counter = 0;
     score = 0;
     
     bCam = false;
@@ -57,10 +39,11 @@ void testApp::setup() {
 
 //--------------------------------------------------------------
 void testApp::update() {
-    
-    
 
+// GAME MECHANICS
+    counter = ofGetElapsedTimef();
     
+// TRACKING UPDATE
     cam.update();
 	if(cam.isFrameNew()) {
 		tracker.update(toCv(cam));
@@ -70,81 +53,91 @@ void testApp::update() {
 		rotationMatrix = tracker.getRotationMatrix();
 	}
     
+
+// PARTICLES BOUNDARIES
+    for (int i = 0; i<particleList.size(); i++) {
+        particleList[i].update();
+        if ( particleList[i].pos.x <= 0 || particleList[i].pos.x >= ofGetWindowWidth() ) {
+            particleList[i].vel.x *= -1;
+        }
+        if ( particleList[i].pos.y <= 0 || particleList[i].pos.y >= ofGetWindowHeight()) {
+            particleList[i].vel.y *= -1;
+        }
+    }
+    
+// MMOUTH OPENESS
     prevMouth.x = mouth_width;
     prevMouth.y = mouth_height;
-    
     mouth_width = tracker.getGesture(ofxFaceTracker::MOUTH_WIDTH) * 10;
     mouth_height = tracker.getGesture(ofxFaceTracker::MOUTH_HEIGHT) * 20;
     
-    float facedireciton = tracker.getOrientation().x;
-
-    ofVec2f myPos;
-    ofVec2f trackerPos;
-    trackerPos.set(tracker.getPosition());
     
-    myPos.x = ofMap(tracker.getPosition().x, 0, 350, 0, ofGetWindowWidth());
-    myPos.y = ofMap(tracker.getPosition().y, 0, 250,0, ofGetWindowHeight());
-    eatterPos.x = myPos.x;
-    eatterPos.y = myPos.y;
-    
-    
-    //PIZZA
-//    for( int i=0; i<particles.size(); i++ ){
-//        ofVec2f tempVel = particles[i].getVelocity();
-//        ofVec2f tempPos = particles[i].getPosition();
-//        
-//        if (tempPos.x < 0 ) particles[i].setPosition(ofGetWindowWidth(), tempPos.y);
-//        if (tempPos.y < 0 ) particles[i].setPosition(tempPos.x, ofGetWindowHeight());
-//        if (tempPos.x > ofGetWindowWidth() ) particles[i].setPosition(0, tempPos.y);
-//        if (tempPos.y > ofGetWindowHeight() ) particles[i].setPosition(tempPos.x, 0);
-//        
-//        particles[i].setVelocity( tempVel );
-//    }
-    
-    
-    
+// CHARACTER MOVE
+    fat = ofMap(score, 0, 50, 0.1, 0.03);
+    float catchSpeed = fat;
+    cout << fat << endl;
+    trackerPos = tracker.getPosition();
+    trackerPosMapped.x = ofMap(trackerPos.x, 0, 300, 0, ofGetWindowWidth());
+    trackerPosMapped.y = ofMap(trackerPos.y, 0, 200,0, ofGetWindowHeight());
+    //ZENO
+    myPos.x = catchSpeed * trackerPosMapped.x + (1-catchSpeed) * myPos.x;
+    myPos.y = catchSpeed * trackerPosMapped.y + (1-catchSpeed) * myPos.y;
 }
 
 //--------------------------------------------------------------
 void testApp::draw() {
-//    ofBackgroundGradient(ofColor(233,225,199), ofColor(169,179,172));
-	ofSetColor(255,0,0);
-	if(bCam == true) cam.draw(0, 0, 640, 480);
+	ofSetColor(255);
     
-	ofDrawBitmapString(ofToString((int) ofGetFrameRate()), 10, 20);
 	
-	
-    if(tracker.getFound()) {
-		ofSetLineWidth(1);
-        ofFill();
-		tracker.draw();
-	}
-
+// TRACKING
+    if(bCam){
+        ofPushMatrix();{
+            ofScale(0.5, 0.5);
+            cam.draw(0, 0, 640, 480);
+        }ofPopMatrix();
+    
+        if(tracker.getFound()) {
+            ofSetLineWidth(1);
+            ofFill();
+            tracker.draw();
+        }
+    }
+    
+// CHARACTER
     ofPushMatrix();{
-//        ofTranslate(ofGetWindowWidth()/2, ofGetWindowHeight()/2);
         ofSetColor(255, 0, 0);
-        ofEllipse(eatterPos.x, eatterPos.y, mouth_width, mouth_height);
-        ofSetColor(ofColor::blue,30);
-        ofEllipse(eatterPos.x, eatterPos.y, prevMouth.x, prevMouth.y);
-
+        ofEllipse(myPos.x, myPos.y, mouth_width*0.5+10, mouth_height+10);
     }ofPopMatrix();
     
+// DRAWING PARTICLES
+    for (int i = 0; i < particleList.size(); i++) {
+
+// EATTING MECHANICS
+        float distance = ofDist(myPos.x, myPos.y, particleList[i].pos.x, particleList[i].pos.y);
+        if (distance < mouthRadius && prevMouth.y + 10 < mouth_height) {
+            particleList.erase(particleList.begin()+i);
+            score ++;
+        }
+        
+        particleList[i].draw();
+    }
+    
+//DEBUGGING
     ofDrawBitmapStringHighlight("Score: "+ofToString(score), ofPoint(10,20));
+    ofDrawBitmapStringHighlight("Time: "+ofToString(counter), ofPoint(10,40));
+}
+//--------------------------------------------------------------
+
+void testApp::keyPressed(int key) {
+	if (key == 'r')  tracker.reset();
+    if (key == OF_KEY_UP)   score ++;
+    if (key == 'c')   bCam = !bCam;
     
     
-//    circle.draw();
-    
-    for(int i=0; i<particles.size(); i++) {
-        particles[i].draw();
-	}
-    
-    cout << particles.size() << endl;
-    
+}
+//--------------------------------------------------------------
+void testApp::mousePressed(int x, int y, int button){
+
+
 }
 
-//--------------------------------------------------------------
-void testApp::keyPressed(int key) {
-	if(key == 'r') {
-		tracker.reset();
-	} else if(key == 'c') bCam = !bCam;
-}

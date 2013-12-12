@@ -11,19 +11,27 @@
 
 Particles::Particles(){
     friction = ofRandom(0.8,1.5);
+    pizza.loadImage("pizza.png");
+    vel.set(ofRandom(-3,5),ofRandom(-3,5));
+
 }
 
 void Particles::update(){
     vel += acc ;
     pos += vel;
     
-    vel *= friction;
-    acc.set(0); //normalizer
+//    vel *= friction;
+//    acc.set(0); //normalizer
 }
 
 void Particles::draw(){
-//    ofSetColor(ofColor::magenta);
     ofCircle(pos, 4);
+    glPushMatrix();{
+        ofTranslate(pos);
+        ofSetColor(255);
+        pizza.draw(-25,-25,50, 50);
+    } glPopMatrix();
+
 }
 
 void Particles::addForce(ofVec2f force){
