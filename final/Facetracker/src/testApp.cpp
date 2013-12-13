@@ -16,7 +16,10 @@ void testApp::setup() {
 	
 	tracker.setup();
     mouthRadius = 40;
-
+    
+    font16.loadFont("pastelaria.ttf", 16);
+    font30.loadFont("pastelaria.ttf", 30);
+    
     //particle
     for (int i = 0; i < 50; i++){
         Particles p;
@@ -31,8 +34,6 @@ void testApp::setup() {
         burgerList.push_back(b);
     }
     
-    
-
     //tracker movimentation
     fat = 0.01f;
     myPos.set(ofGetWindowWidth()/2,ofGetWindowHeight()/2);
@@ -43,42 +44,26 @@ void testApp::setup() {
     score = 0;
     bCam = false;
     calories = 40;
-    
-    burgerPos.set(ofRandomWidth(),ofRandomHeight());
-    burgerVel.set(ofRandom(5,6), 0);
-
-
 }
 
 //--------------------------------------------------------------
 void testApp::update() {
     
-// GAME MECHANICS
-    counter = ofGetElapsedTimef();
     
-// TRACKING UPDATE
-    cam.update();
-	if(cam.isFrameNew()) {
-		tracker.update(toCv(cam));
-		position = tracker.getPosition();
-		scale = tracker.getScale();
-		orientation = tracker.getOrientation();
-		rotationMatrix = tracker.getRotationMatrix();
-	}
-
-
+    // TRACKING UPDATE
+    trackerupdate();
     
-// MMOUTH OPENESS
+    // MMOUTH OPENESS
     prevMouth.x = mouth_width;
     prevMouth.y = mouth_height;
     mouth_width = tracker.getGesture(ofxFaceTracker::MOUTH_WIDTH) * 10;
     mouth_height = tracker.getGesture(ofxFaceTracker::MOUTH_HEIGHT) * 20;
     
     
-// CHARACTER MOVE
+    // CHARACTER MOVE
     fat = ofMap(score, 0, 50, 0.1, 0.03);
     float catchSpeed = fat;
-//    cout << fat << endl;
+    ofVec2f trackerPosMapped, trackerPos;
     trackerPos = tracker.getPosition();
     trackerPosMapped.x = ofMap(trackerPos.x, 0, 300, 0, ofGetWindowWidth());
     trackerPosMapped.y = ofMap(trackerPos.y, 0, 200,0, ofGetWindowHeight());
@@ -86,112 +71,93 @@ void testApp::update() {
     myPos.x = catchSpeed * trackerPosMapped.x + (1-catchSpeed) * myPos.x;
     myPos.y = catchSpeed * trackerPosMapped.y + (1-catchSpeed) * myPos.y;
     
+    //creating the eyes
     eyePos.set(myPos.x, myPos.y-70);
     leftEye.pos = ofPoint( eyePos.x - 35, eyePos.y );
     rightEye.pos = ofPoint( eyePos.x + 35, eyePos.y );
     
-
-    
-    ofPoint focus;
-
-    
-    // CREATING PIZZAS
-    for (int i = 0; i<particleList.size(); i++) {
-        particleList[i].update();
-    }
-    //CREATING BURGERS
-    Vector<float> eyesDistBurgers;
-    for (int i = 0; i<burgerList.size(); i++) {
-        burgerList[i].update();
-        float eyesToBurger = ofDist(burgerList[i].pos.x, burgerList[i].pos.y, eyePos.x, eyePos.y);
-        eyesDistBurgers.push_back( eyesToBurger );
-        
-        for (int k=0; k<eyesDistBurgers.size(); k++) {
-            if(eyesDistBurgers[i] > eyesDistBurgers[i+1] ){
-                focus = burgerList[i].pos;
-            }
+    if(stage == 1){
+        // CREATING PIZZAS
+        for (int i = 0; i<particleList.size(); i++) {
+            particleList[i].update();
+        }
+        // CREATING BURGERS
+        for (int i = 0; i<burgerList.size(); i++) {
+            burgerList[i].update();
         }
         
-        //        float distance1 = ofDist(eyePosition.x, eyePosition.y, ballpos2.x, ballpos2.y);
-        //        float distance2 = ofDist(ballpos1.x, ballpos1.y, eyePosition.x, eyePosition.y);
-        //        cout << distance1 <<" || "<<  distance2 << endl;
-        //
-        //        if(distance1 >= distance2)  focus = ballpos2;
-        //        else                        focus = ballpos1;
-        //        
+        //EYES FOCUS
+        float eyesToBurger = ofDist(burgerList[0].pos.x, burgerList[0].pos.y, eyePos.x, eyePos.y);
+        ofPoint focus = burgerList[0].pos;
+        leftEye.mousePos = focus;
+        rightEye.mousePos = focus;
     }
-    leftEye.mousePos = focus;
-    rightEye.mousePos = focus;
-    
-//    burgerPos += burgerVel;
-//    if(burgerPos.x > ofGetWindowWidth() || burgerPos.x < 0) burgerVel.x *= -1;
-//    if(burgerPos.y > ofGetWindowHeight() || burgerPos.y < 0) burgerVel.y *= -1;
-    
-
+    // GAME MECHANICS
+    if(stage == 1){
+        counter = (80 - ofGetElapsedTimef());
+        if(counter == 0) stage = 3;
+    }
 }
 
 //--------------------------------------------------------------
 void testApp::draw() {
-	ofSetColor( 255 );
+    
+    ofSetColor( 255 );
     character( myPos.x, myPos.y );
     leftEye.draw();
     rightEye.draw();
     
-// TRACKING
-    ofSetColor( 255 );
-
-    if(bCam){
-        ofPushMatrix();{
-            ofScale(0.5, 0.5);
-            cam.draw(0, 0, 640, 480);
-        }ofPopMatrix();
+    // TRACKING
+    trackerdraw();
     
-        if(tracker.getFound()) {
-            ofSetLineWidth(1);
-            ofFill();
-            tracker.draw();
-        }
-    }
-    
-// CHARACTER MOUTH
+    // CHARACTER MOUTH
     ofPushMatrix();{
         ofSetColor(239,65,54);
         ofEllipse(myPos.x, myPos.y, (mouth_width*0.5)+10, (mouth_height*0.5)+10);
     }ofPopMatrix();
     
-// DRAWING PARTICLES
-    for (int i = 0; i < particleList.size(); i++) {
-
-// EATTING MECHANICS
-        float distance = ofDist(myPos.x, myPos.y, particleList[i].pos.x, particleList[i].pos.y);
-        if (distance < mouthRadius && prevMouth.y + 10 < mouth_height) {
-            particleList.erase(particleList.begin()+i);
-            score ++;
-            calories+=0.5;
+    if (stage == 0) {
+        
+        ofSetColor(ofRandom(255),0,0,80);
+        font30.drawString("PRESS 'RETURN' WHEN YOU ARE READY", ofGetWindowWidth()/2 - 280, ofGetWindowHeight()/2);
+        
+    } else if(stage == 1){
+        // DRAWING PARTICLES
+        for (int i = 0; i < particleList.size(); i++) {
+            
+            // EATTING MECHANICS
+            float distance = ofDist(myPos.x, myPos.y, particleList[i].pos.x, particleList[i].pos.y);
+            if (distance < mouthRadius && prevMouth.y + 10 < mouth_height) {
+                particleList.erase(particleList.begin()+i);
+                score ++;
+                calories+=0.5;
+            }
+            
+            particleList[i].draw();
         }
-        
-        particleList[i].draw();
-    }
-    
-    // DRAWING BURGERS
-    for (int i = 0; i < burgerList.size(); i++) {
-        
-        // BURGER EATTING MECHANICS
-        float burgerDist = ofDist(myPos.x, myPos.y, burgerList[i].pos.x, burgerList[i].pos.y);
-        if (burgerDist < mouthRadius && prevMouth.y + 10 < mouth_height) {
-            burgerList.erase(burgerList.begin()+i);
-            score +=5;
-            calories+=1;
+        // DRAWING BURGERS
+        for (int i = 0; i < burgerList.size(); i++) {
+            
+            // BURGER EATTING MECHANICS
+            float burgerDist = ofDist(myPos.x, myPos.y, burgerList[i].pos.x, burgerList[i].pos.y);
+            if (burgerDist < mouthRadius && prevMouth.y + 10 < mouth_height) {
+                burgerList.erase(burgerList.begin()+i);
+                score +=5;
+                calories+=1;
+            }
+            
+            burgerList[i].draw();
         }
+        //DEBUGGING
+        ofSetColor(0);
+        font16.drawString("Score: "+ofToString(score), 30, 30);
+        font16.drawString("Time: "+ofToString(counter), ofGetWindowWidth()-100, 30);
         
-        burgerList[i].draw();
+    } else if(counter <= 0 || stage == 3 || particleList.size() == 0){
+        particleList.clear();
+        ofSetColor(ofRandom(255),0,0,80);
+        font30.drawString("SCORE "+ofToString(score), ofGetWindowWidth()/2 - 280, ofGetWindowHeight()/2);
     }
-    
-//DEBUGGING
-    ofDrawBitmapStringHighlight("Score: "+ofToString(score), ofPoint(10,20));
-    ofDrawBitmapStringHighlight("Time: "+ofToString(counter), ofPoint(10,40));
-    
-    ofRect(burgerPos, 40,40);
 }
 //--------------------------------------------------------------
 
@@ -200,12 +166,44 @@ void testApp::keyPressed(int key) {
     if (key == OF_KEY_UP)   score ++;
     if (key == 'c')   bCam = !bCam;
     if (key == 't')   ofToggleFullscreen() ;
+    if (key == OF_KEY_RETURN ){
+        stage ++;
+        ofResetElapsedTimeCounter();
+    }
     
 }
 //--------------------------------------------------------------
+void testApp::trackerupdate(){
+    cam.update();
+	if(cam.isFrameNew()) {
+		tracker.update(toCv(cam));
+		position = tracker.getPosition();
+		scale = tracker.getScale();
+		orientation = tracker.getOrientation();
+		rotationMatrix = tracker.getRotationMatrix();
+	}
+}
+//--------------------------------------------------------------
+void testApp::trackerdraw(){
+    ofSetColor( 255 );
+    if(bCam){
+        ofPushMatrix();{
+            ofScale(0.5, 0.5);
+            cam.draw(0, 0, 640, 480);
+        }ofPopMatrix();
+        
+        if(tracker.getFound()) {
+            ofSetLineWidth(1);
+            ofFill();
+            tracker.draw();
+        }
+    }
+}
+
+//--------------------------------------------------------------
 void testApp::mousePressed(int x, int y, int button){
-
-
+    
+    
 }
 
 //--------------------------------------------------------------
@@ -217,7 +215,7 @@ void testApp::character(float x,float y){
         ofFill();
         ofSetColor(245,224,205);
         ofCircle(420, 310,calories);
-        // face
+        // FACE
         ofFill();
         ofSetColor(245,224,205);
         ofBeginShape();
@@ -231,46 +229,6 @@ void testApp::character(float x,float y){
         ofBezierVertex(451,229,475,254,475,285);
         ofVertex(475,312);
         ofEndShape();
-        // left eye outter
-//        ofFill();
-//        ofSetColor(255);
-//        ofBeginShape();
-//        ofVertex(461,286);
-//        ofBezierVertex(461,296,453,304,443,304);
-//        ofBezierVertex(433,304,425,296,425,286);
-//        ofBezierVertex(425,276,433,268,443,268);
-//        ofBezierVertex(453,268,461,276,461,286);
-//        ofEndShape();
-//        // left eye - pupil
-//        ofFill();
-//        ofSetColor(35,31,32);
-//        ofBeginShape();
-//        ofVertex(449,286);
-//        ofBezierVertex(449,290,446,292,443,292);
-//        ofBezierVertex(440,292,437,290,437,286);
-//        ofBezierVertex(437,283,440,281,443,281);
-//        ofBezierVertex(446,281,449,283,449,286);
-//        ofEndShape();
-//        // right eye outter
-//        ofFill();
-//        ofSetColor(255,255,255);
-//        ofBeginShape();
-//        ofVertex(415,286);
-//        ofBezierVertex(415,296,407,304,397,304);
-//        ofBezierVertex(387,304,379,296,379,286);
-//        ofBezierVertex(379,276,387,268,397,268);
-//        ofBezierVertex(407,268,415,276,415,286);
-//        ofEndShape();
-//        // right eye pupil
-//        ofFill();
-//        ofSetColor(35,31,32);
-//        ofBeginShape();
-//        ofVertex(403,286);
-//        ofBezierVertex(403,290,400,292,397,292);
-//        ofBezierVertex(394,292,391,290,391,286);
-//        ofBezierVertex(391,283,394,281,397,281);
-//        ofBezierVertex(400,281,403,283,403,286);
-//        ofEndShape();
         // NOSE
         ofNoFill();
         ofSetLineWidth(1);
@@ -284,13 +242,7 @@ void testApp::character(float x,float y){
         ofFill();
         ofSetColor(239,65,54);
         ofEllipse(420, 335, 20, 10);
-//        ofBeginShape();
-//        ofVertex(384,338);
-//        ofBezierVertex(384,343,399,347,419,347);
-//        ofBezierVertex(438,347,453,343,453,338);
-//        ofBezierVertex(453,332,438,328,419,328);
-//        ofBezierVertex(399,328,384,332,384,338);
-//        ofEndShape();
+        //i dont care anymore
         ofFill();
         ofSetColor(35,31,32);
         ofBeginShape();
@@ -317,7 +269,6 @@ void testApp::character(float x,float y){
         ofBezierVertex(428,257,427,259,427,261);
         ofVertex(427,261);
         ofEndShape();
-
     }ofPopMatrix();
     
 }

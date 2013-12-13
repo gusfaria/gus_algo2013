@@ -26,7 +26,6 @@ public:
             
             ofRotate( ofRadToDeg(angle) );
             
-            
             // outline
             ofSetColor( 255 );
             ofCircle(0, 0, 55);
@@ -45,9 +44,11 @@ public:
 	void setup();
 	void update();
 	void draw();
-	void character(float x,float y);
     void keyPressed(int key);
     void mousePressed(int x, int y, int button);
+    void character(float x,float y);
+    void trackerupdate();
+    void trackerdraw();
 
 	
 	ofVideoGrabber cam;
@@ -56,23 +57,17 @@ public:
 	float scale;
 	ofVec3f orientation;
 	ofMatrix4x4 rotationMatrix;
-	
-	Mat translation, rotation;
-	ofMatrix4x4 pose;
-	
-	ofEasyCam easyCam;
     
     vector<Particles> particleList;
+    vector<Burger> burgerList;
     
     ofVec2f myPos;
-    ofVec2f trackerPosMapped, trackerPos;
     float fat;
     float calories;
     float mouthRadius;
     ofVec2f prevMouth;
     float mouth_width;
     float mouth_height;
-    
     
     //game mechanics
     int score;
@@ -81,11 +76,10 @@ public:
     
     //debug
     bool bCam;
+
     
     Eyeball leftEye, rightEye;
-    ofVec2f burgerPos, burgerVel;
     ofVec2f eyePos;
     
-    vector<Burger> burgerList;
-    
+    ofTrueTypeFont font16, font30;
 };
