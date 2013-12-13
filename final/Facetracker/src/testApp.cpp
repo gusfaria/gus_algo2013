@@ -65,11 +65,18 @@ void testApp::update() {
     float catchSpeed = fat;
     ofVec2f trackerPosMapped, trackerPos;
     trackerPos = tracker.getPosition();
+    
+    //trackerPos.x = ofGetWindowWidth() + trackerPos.x;
+    
     trackerPosMapped.x = ofMap(trackerPos.x, 0, 300, 0, ofGetWindowWidth());
     trackerPosMapped.y = ofMap(trackerPos.y, 0, 200,0, ofGetWindowHeight());
+    
+    
+    trackerPosMapped.x = ofGetWindowWidth() - trackerPosMapped.x;
     //ZENO
     myPos.x = catchSpeed * trackerPosMapped.x + (1-catchSpeed) * myPos.x;
     myPos.y = catchSpeed * trackerPosMapped.y + (1-catchSpeed) * myPos.y;
+    
     
     //creating the eyes
     eyePos.set(myPos.x, myPos.y-70);
@@ -156,7 +163,7 @@ void testApp::draw() {
     } else if(counter <= 0 || stage == 3 || particleList.size() == 0){
         particleList.clear();
         ofSetColor(ofRandom(255),0,0,80);
-        font30.drawString("SCORE "+ofToString(score), ofGetWindowWidth()/2 - 280, ofGetWindowHeight()/2);
+        font30.drawString("YOUR SCORE "+ofToString(score), ofGetWindowWidth()/2 - 150, ofGetWindowHeight()/2);
     }
 }
 //--------------------------------------------------------------
@@ -170,12 +177,14 @@ void testApp::keyPressed(int key) {
         stage ++;
         ofResetElapsedTimeCounter();
     }
+    if (key == 'R') setup();
     
 }
 //--------------------------------------------------------------
 void testApp::trackerupdate(){
     cam.update();
 	if(cam.isFrameNew()) {
+        
 		tracker.update(toCv(cam));
 		position = tracker.getPosition();
 		scale = tracker.getScale();
