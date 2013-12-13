@@ -15,14 +15,9 @@ public:
     void draw();
     void update();
     
-    void addForce(ofVec2f force);
-    void addRepulsionForce(float px, float py, float radius, float strength);
-    void addAttractionForce(float px, float py, float radius, float strength);
-    
     float friction;
     
     ofVec2f pos, vel, acc;
-    
     ofImage pizza;
 
     

@@ -20,8 +20,9 @@ void Particles::update(){
     vel += acc ;
     pos += vel;
     
-//    vel *= friction;
-//    acc.set(0); //normalizer
+    if ( pos.x <= 0 || pos.x >= ofGetWindowWidth() ) vel.x *= -1;
+    if ( pos.y <= 0 || pos.y >= ofGetWindowHeight() ) vel.y *= -1;
+
 }
 
 void Particles::draw(){
@@ -32,40 +33,4 @@ void Particles::draw(){
         pizza.draw(-25,-25,50, 50);
     } glPopMatrix();
 
-}
-
-void Particles::addForce(ofVec2f force){
-    acc += force;
-}
-
-void Particles::addRepulsionForce(float px, float py, float radius, float strength){
-    ofVec2f posOfForce;
-    posOfForce.set(px,py);
-    
-    ofVec2f diff = pos - posOfForce;
-    
-    if (diff.length() < radius) {
-        float pct = 1 - (diff.length() / radius);
-        diff.normalize();
-        acc.x += diff.x * pct * strength;
-        acc.y += diff.y * pct * strength;
-    }
-    
-}
-
-void Particles::addAttractionForce(float px, float py, float radius, float strength){
-    ofVec2f posOfForce;
-    posOfForce.set(px,py);
-    
-    ofVec2f diff = pos - posOfForce;
-    
-    if (diff.length() < radius) {
-        float pct = 1 - (diff.length() / radius);
-        diff.normalize();
-        
-        acc.x -= diff.x * pct * strength;
-        acc.y -= diff.y * pct * strength;
-        
-    }
-    
 }

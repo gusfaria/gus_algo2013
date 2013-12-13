@@ -65,6 +65,7 @@
 		16C0A1CD1857904B00BFAEFB /* b2WheelJoint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 16C0A18E1857904B00BFAEFB /* b2WheelJoint.cpp */; };
 		16C0A1CE1857904B00BFAEFB /* b2Rope.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 16C0A1911857904B00BFAEFB /* b2Rope.cpp */; };
 		16C0A1CF1857904B00BFAEFB /* del_impl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 16C0A1951857904B00BFAEFB /* del_impl.cpp */; };
+		16C0A1FD185AE72C00BFAEFB /* Burgers.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 16C0A1FB185AE72C00BFAEFB /* Burgers.cpp */; };
 		1D5F3298C2FA073628012944 /* ofxCvContourFinder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C76DE5C29BDBD2CAA1DD0021 /* ofxCvContourFinder.cpp */; };
 		2023EF517ED2D8B397511D4B /* Helpers.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B9076967F8C54A04362C04AA /* Helpers.cpp */; };
 		24735CD2E138DC5C1F0A1085 /* ofxFaceTracker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 185BB9B07B8DB74BD2D3211F /* ofxFaceTracker.cpp */; };
@@ -274,6 +275,8 @@
 		16C0A1971857904B00BFAEFB /* dpoint.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = dpoint.hpp; sourceTree = "<group>"; };
 		16C0A1981857904B00BFAEFB /* triangle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = triangle.h; sourceTree = "<group>"; };
 		16C0A1991857904B00BFAEFB /* triangle_impl.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = triangle_impl.hpp; sourceTree = "<group>"; };
+		16C0A1FB185AE72C00BFAEFB /* Burgers.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Burgers.cpp; sourceTree = "<group>"; };
+		16C0A1FC185AE72C00BFAEFB /* Burgers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Burgers.h; sourceTree = "<group>"; };
 		178547E33CE398C7B59F08AB /* ContourFinder.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ContourFinder.h; path = ../../../addons/ofxCv/libs/ofxCv/include/ofxCv/ContourFinder.h; sourceTree = SOURCE_ROOT; };
 		185BB9B07B8DB74BD2D3211F /* ofxFaceTracker.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = ofxFaceTracker.cpp; path = ../../../addons/ofxFaceTracker/src/ofxFaceTracker.cpp; sourceTree = SOURCE_ROOT; };
 		19660B42DF06415007708495 /* IO.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = IO.h; path = ../../../addons/ofxFaceTracker/libs/FaceTracker/include/FaceTracker/IO.h; sourceTree = SOURCE_ROOT; };
@@ -1155,6 +1158,8 @@
 				2745C0B618210A7D00F2D29A /* testApp.h */,
 				16506920184D5D650062729B /* Particles.h */,
 				1650691F184D5D650062729B /* Particles.cpp */,
+				16C0A1FB185AE72C00BFAEFB /* Burgers.cpp */,
+				16C0A1FC185AE72C00BFAEFB /* Burgers.h */,
 			);
 			path = src;
 			sourceTree = SOURCE_ROOT;
@@ -1334,6 +1339,7 @@
 				16C0A19A1857904B00BFAEFB /* ofxBox2d.cpp in Sources */,
 				169D3C72FDE6C5590A1616F5 /* ofxCvFloatImage.cpp in Sources */,
 				16C0A1A71857904B00BFAEFB /* b2DynamicTree.cpp in Sources */,
+				16C0A1FD185AE72C00BFAEFB /* Burgers.cpp in Sources */,
 				16C0A1B31857904B00BFAEFB /* b2Body.cpp in Sources */,
 				16C0A1C91857904B00BFAEFB /* b2PulleyJoint.cpp in Sources */,
 				16C0A1AC1857904B00BFAEFB /* b2PolygonShape.cpp in Sources */,

@@ -8,6 +8,8 @@ using namespace cv;
 #include "ofxFaceTracker.h"
 #include "ofxBox2d.h"
 #include "Particles.h"
+#include "Burgers.h"
+
 class Eyeball {
 public:
     ofPoint pos, mousePos;
@@ -16,7 +18,7 @@ public:
     void draw() {
         ofPushMatrix();{
             ofTranslate( pos );
-            ofScale(0.5, 0.5);
+            ofScale(0.5f,0.5f);
             float dx = mousePos.x - pos.x;
             float dy = mousePos.y - pos.y;
             
@@ -24,21 +26,19 @@ public:
             
             ofRotate( ofRadToDeg(angle) );
             
-            ofSetColor( 0 );
             
             // outline
-            ofSetColor(255);
-            ofCircle(0, 0, 40);
+            ofSetColor( 255 );
+            ofCircle(0, 0, 55);
             
             // pupil
-            ofFill();
-            ofSetColor(0);
-            ofCircle(25, 0, 15);
-            
+            ofSetColor( 0 );
+            ofCircle(25, 0, 20);
         }ofPopMatrix();
-        
     }
+    
 };
+
 
 class testApp : public ofBaseApp {
 public:
@@ -81,4 +81,11 @@ public:
     
     //debug
     bool bCam;
+    
+    Eyeball leftEye, rightEye;
+    ofVec2f burgerPos, burgerVel;
+    ofVec2f eyePos;
+    
+    vector<Burger> burgerList;
+    
 };
