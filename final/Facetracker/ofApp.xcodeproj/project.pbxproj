@@ -66,6 +66,10 @@
 		16C0A1CE1857904B00BFAEFB /* b2Rope.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 16C0A1911857904B00BFAEFB /* b2Rope.cpp */; };
 		16C0A1CF1857904B00BFAEFB /* del_impl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 16C0A1951857904B00BFAEFB /* del_impl.cpp */; };
 		16C0A1FD185AE72C00BFAEFB /* Burgers.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 16C0A1FB185AE72C00BFAEFB /* Burgers.cpp */; };
+		16C0A21D185BB26600BFAEFB /* ofxXmlSettings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 16C0A216185BB26600BFAEFB /* ofxXmlSettings.cpp */; };
+		16C0A21E185BB26600BFAEFB /* tinyxml.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 16C0A219185BB26600BFAEFB /* tinyxml.cpp */; };
+		16C0A21F185BB26600BFAEFB /* tinyxmlerror.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 16C0A21B185BB26600BFAEFB /* tinyxmlerror.cpp */; };
+		16C0A220185BB26600BFAEFB /* tinyxmlparser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 16C0A21C185BB26600BFAEFB /* tinyxmlparser.cpp */; };
 		1D5F3298C2FA073628012944 /* ofxCvContourFinder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C76DE5C29BDBD2CAA1DD0021 /* ofxCvContourFinder.cpp */; };
 		2023EF517ED2D8B397511D4B /* Helpers.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B9076967F8C54A04362C04AA /* Helpers.cpp */; };
 		24735CD2E138DC5C1F0A1085 /* ofxFaceTracker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 185BB9B07B8DB74BD2D3211F /* ofxFaceTracker.cpp */; };
@@ -277,6 +281,13 @@
 		16C0A1991857904B00BFAEFB /* triangle_impl.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = triangle_impl.hpp; sourceTree = "<group>"; };
 		16C0A1FB185AE72C00BFAEFB /* Burgers.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Burgers.cpp; sourceTree = "<group>"; };
 		16C0A1FC185AE72C00BFAEFB /* Burgers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Burgers.h; sourceTree = "<group>"; };
+		16C0A216185BB26600BFAEFB /* ofxXmlSettings.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ofxXmlSettings.cpp; sourceTree = "<group>"; };
+		16C0A217185BB26600BFAEFB /* ofxXmlSettings.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxXmlSettings.h; sourceTree = "<group>"; };
+		16C0A219185BB26600BFAEFB /* tinyxml.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = tinyxml.cpp; sourceTree = "<group>"; };
+		16C0A21A185BB26600BFAEFB /* tinyxml.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = tinyxml.h; sourceTree = "<group>"; };
+		16C0A21B185BB26600BFAEFB /* tinyxmlerror.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = tinyxmlerror.cpp; sourceTree = "<group>"; };
+		16C0A21C185BB26600BFAEFB /* tinyxmlparser.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = tinyxmlparser.cpp; sourceTree = "<group>"; };
+		16C0A222185BB62B00BFAEFB /* ofxCenteredTrueTypeFont.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxCenteredTrueTypeFont.h; sourceTree = "<group>"; };
 		178547E33CE398C7B59F08AB /* ContourFinder.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = ContourFinder.h; path = ../../../addons/ofxCv/libs/ofxCv/include/ofxCv/ContourFinder.h; sourceTree = SOURCE_ROOT; };
 		185BB9B07B8DB74BD2D3211F /* ofxFaceTracker.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = ofxFaceTracker.cpp; path = ../../../addons/ofxFaceTracker/src/ofxFaceTracker.cpp; sourceTree = SOURCE_ROOT; };
 		19660B42DF06415007708495 /* IO.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = IO.h; path = ../../../addons/ofxFaceTracker/libs/FaceTracker/include/FaceTracker/IO.h; sourceTree = SOURCE_ROOT; };
@@ -731,6 +742,37 @@
 			path = triangle;
 			sourceTree = "<group>";
 		};
+		16C0A214185BB26600BFAEFB /* ofxXmlSettings */ = {
+			isa = PBXGroup;
+			children = (
+				16C0A215185BB26600BFAEFB /* src */,
+				16C0A218185BB26600BFAEFB /* libs */,
+			);
+			name = ofxXmlSettings;
+			sourceTree = "<group>";
+		};
+		16C0A215185BB26600BFAEFB /* src */ = {
+			isa = PBXGroup;
+			children = (
+				16C0A216185BB26600BFAEFB /* ofxXmlSettings.cpp */,
+				16C0A217185BB26600BFAEFB /* ofxXmlSettings.h */,
+			);
+			name = src;
+			path = ../../../addons/ofxXmlSettings/src;
+			sourceTree = "<group>";
+		};
+		16C0A218185BB26600BFAEFB /* libs */ = {
+			isa = PBXGroup;
+			children = (
+				16C0A219185BB26600BFAEFB /* tinyxml.cpp */,
+				16C0A21A185BB26600BFAEFB /* tinyxml.h */,
+				16C0A21B185BB26600BFAEFB /* tinyxmlerror.cpp */,
+				16C0A21C185BB26600BFAEFB /* tinyxmlparser.cpp */,
+			);
+			name = libs;
+			path = ../../../addons/ofxXmlSettings/libs;
+			sourceTree = "<group>";
+		};
 		170C3384C93B182490DDC9CC /* contrib */ = {
 			isa = PBXGroup;
 			children = (
@@ -1014,6 +1056,7 @@
 		BB4B014C10F69532006C3DED /* addons */ = {
 			isa = PBXGroup;
 			children = (
+				16C0A214185BB26600BFAEFB /* ofxXmlSettings */,
 				16C0A1191857904B00BFAEFB /* ofxBox2d */,
 				A0B90D3B0ADB9C1716816714 /* ofxOpenCv */,
 				6025FAF6414C2CA589764D26 /* ofxCv */,
@@ -1157,6 +1200,7 @@
 				2745C0B518210A7D00F2D29A /* testApp.cpp */,
 				2745C0B618210A7D00F2D29A /* testApp.h */,
 				16506920184D5D650062729B /* Particles.h */,
+				16C0A222185BB62B00BFAEFB /* ofxCenteredTrueTypeFont.h */,
 				1650691F184D5D650062729B /* Particles.cpp */,
 				16C0A1FB185AE72C00BFAEFB /* Burgers.cpp */,
 				16C0A1FC185AE72C00BFAEFB /* Burgers.h */,
@@ -1326,6 +1370,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				16C0A1B61857904B00BFAEFB /* b2Island.cpp in Sources */,
+				16C0A21E185BB26600BFAEFB /* tinyxml.cpp in Sources */,
 				E4B69E200A3A1BDC003C02F2 /* main.cpp in Sources */,
 				16C0A1A11857904B00BFAEFB /* b2BroadPhase.cpp in Sources */,
 				250A95BA26587BE85DB0A353 /* ofxCvColorImage.cpp in Sources */,
@@ -1336,6 +1381,7 @@
 				16C0A1BE1857904B00BFAEFB /* b2EdgeAndCircleContact.cpp in Sources */,
 				16C0A1B71857904B00BFAEFB /* b2World.cpp in Sources */,
 				1D5F3298C2FA073628012944 /* ofxCvContourFinder.cpp in Sources */,
+				16C0A21F185BB26600BFAEFB /* tinyxmlerror.cpp in Sources */,
 				16C0A19A1857904B00BFAEFB /* ofxBox2d.cpp in Sources */,
 				169D3C72FDE6C5590A1616F5 /* ofxCvFloatImage.cpp in Sources */,
 				16C0A1A71857904B00BFAEFB /* b2DynamicTree.cpp in Sources */,
@@ -1361,6 +1407,7 @@
 				16C0A1AD1857904B00BFAEFB /* b2BlockAllocator.cpp in Sources */,
 				EBCDE831EFAE08274E799C97 /* Calibration.cpp in Sources */,
 				6AABAB39E82AF5CFEA23A205 /* ContourFinder.cpp in Sources */,
+				16C0A21D185BB26600BFAEFB /* ofxXmlSettings.cpp in Sources */,
 				45CC483A999BF1065A6B926C /* Distance.cpp in Sources */,
 				5CC34D433F5806179935B89D /* Flow.cpp in Sources */,
 				2023EF517ED2D8B397511D4B /* Helpers.cpp in Sources */,
@@ -1370,6 +1417,7 @@
 				16C0A1B41857904B00BFAEFB /* b2ContactManager.cpp in Sources */,
 				16C0A1C01857904B00BFAEFB /* b2PolygonAndCircleContact.cpp in Sources */,
 				10B69DE456AED1288FC9316B /* Tracker.cpp in Sources */,
+				16C0A220185BB26600BFAEFB /* tinyxmlparser.cpp in Sources */,
 				16C0A1B81857904B00BFAEFB /* b2WorldCallbacks.cpp in Sources */,
 				A6668C5B1272D7FCD5B5A16F /* Utilities.cpp in Sources */,
 				DBCB84A37F9AECC254870D79 /* Wrappers.cpp in Sources */,

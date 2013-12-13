@@ -39,11 +39,17 @@ void testApp::setup() {
     myPos.set(ofGetWindowWidth()/2,ofGetWindowHeight()/2);
     
     //game mechanics
-    stage = 0;
+    gamestate = 0;
     counter = 0;
     score = 0;
     bCam = false;
     calories = 40;
+    username = "Enter your name here";
+    startedNameEntry = false;
+    bFirst  = false;
+    
+    loadXMLData();
+    cout << numberOfSavedScores << endl;
 }
 
 //--------------------------------------------------------------
@@ -66,8 +72,6 @@ void testApp::update() {
     ofVec2f trackerPosMapped, trackerPos;
     trackerPos = tracker.getPosition();
     
-    //trackerPos.x = ofGetWindowWidth() + trackerPos.x;
-    
     trackerPosMapped.x = ofMap(trackerPos.x, 0, 300, 0, ofGetWindowWidth());
     trackerPosMapped.y = ofMap(trackerPos.y, 0, 200,0, ofGetWindowHeight());
     
@@ -77,13 +81,12 @@ void testApp::update() {
     myPos.x = catchSpeed * trackerPosMapped.x + (1-catchSpeed) * myPos.x;
     myPos.y = catchSpeed * trackerPosMapped.y + (1-catchSpeed) * myPos.y;
     
-    
     //creating the eyes
     eyePos.set(myPos.x, myPos.y-70);
     leftEye.pos = ofPoint( eyePos.x - 35, eyePos.y );
     rightEye.pos = ofPoint( eyePos.x + 35, eyePos.y );
     
-    if(stage == 1){
+    if(gamestate == 1){
         // CREATING PIZZAS
         for (int i = 0; i<particleList.size(); i++) {
             particleList[i].update();
@@ -100,10 +103,31 @@ void testApp::update() {
         rightEye.mousePos = focus;
     }
     // GAME MECHANICS
-    if(stage == 1){
-        counter = (80 - ofGetElapsedTimef());
-        if(counter == 0) stage = 3;
+    if(gamestate == 0){
+        if(!startedNameEntry){
+            username = "Enter your name here";
+        }
     }
+    
+    if(gamestate == 1){
+        counter = (80 - ofGetElapsedTimef());
+        if(counter == 0 || gamestate == 2) {
+            gamestate = 2;
+            highScores.addTag("game");
+            highScores.pushTag("game", numberOfSavedScores);{
+                highScores.addValue("username", username);
+                highScores.addValue("score", score);
+            }highScores.popTag();
+            
+            highScores.saveFile("highScores.xml");
+        }
+    }
+    
+    if(gamestate == 2){
+        loadXMLData();
+        sortScores();
+    }
+    
 }
 
 //--------------------------------------------------------------
@@ -123,12 +147,18 @@ void testApp::draw() {
         ofEllipse(myPos.x, myPos.y, (mouth_width*0.5)+10, (mouth_height*0.5)+10);
     }ofPopMatrix();
     
-    if (stage == 0) {
+    if (gamestate == 0) {
+        ofPushStyle();{
+            ofSetRectMode(OF_RECTMODE_CENTER);
+            ofSetColor(255, 20);
+            ofRect(ofGetWindowWidth()/2, 100, 250, 40);
+        }ofPopStyle();
         
+        font16.drawStringCentered(username, ofGetWindowWidth()/2, 100);
         ofSetColor(ofRandom(255),0,0,80);
-        font30.drawString("PRESS 'RETURN' WHEN YOU ARE READY", ofGetWindowWidth()/2 - 280, ofGetWindowHeight()/2);
+        font30.drawStringCentered("PRESS 'RETURN' WHEN YOU ARE READY", ofGetWindowWidth()/2, ofGetWindowHeight()/2);
         
-    } else if(stage == 1){
+    } else if(gamestate == 1){
         // DRAWING PARTICLES
         for (int i = 0; i < particleList.size(); i++) {
             
@@ -160,25 +190,117 @@ void testApp::draw() {
         font16.drawString("Score: "+ofToString(score), 30, 30);
         font16.drawString("Time: "+ofToString(counter), ofGetWindowWidth()-100, 30);
         
-    } else if(counter <= 0 || stage == 3 || particleList.size() == 0){
+    } else if(counter <= 0 || gamestate == 2 || particleList.size() == 0){
         particleList.clear();
         ofSetColor(ofRandom(255),0,0,80);
-        font30.drawString("YOUR SCORE "+ofToString(score), ofGetWindowWidth()/2 - 150, ofGetWindowHeight()/2);
+        font30.drawStringCentered("CONGRATULATIONS "+ username + "!\nYOUR SCORE IS "+ofToString(score), ofGetWindowWidth()/2, 100);
     }
+    
+    if(gamestate == 2){
+        ofPushStyle();{
+            ofSetColor(0);
+            if (savedScores.size() < 8) {
+                for (int i = 0; i < savedScores.size(); i++) {
+                    font16.drawString(ofToString(i+1) + ". ", 300+120, 330 + i * 28);
+                    font16.drawString(sortedNames[i], 330+120, 330 + i * 28);
+                    font16.drawString(ofToString(sortedScores[i]), 850+120, 330 + i * 28);
+                }
+            } else if (savedScores.size() >= 5) {
+                for (int i = 0; i < 5; i++) {
+                    font16.drawString(ofToString(i+1) + ". ", 300 + 120, 330 + i * 28);
+                    font16.drawString(sortedNames[i], 330 + 120, 330 + i * 28);
+                    font16.drawString(ofToString(sortedScores[i]), 850 + 120, 330 + i * 28);
+                }
+            }
+        }ofPopStyle();
+        ofDrawBitmapStringHighlight("SPECIAL THANKS TO: CHARLIE WHITNEY, JENNIFER PRESTO, MATT FELSEN, ALBERT 'DA MENG' KIM, BERNARDO SCHORR AND McDONALDS!", ofPoint(10,ofGetWindowHeight()-30));
+    }
+    
 }
 //--------------------------------------------------------------
-
-void testApp::keyPressed(int key) {
-	if (key == 'r')  tracker.reset();
-    if (key == OF_KEY_UP)   score ++;
-    if (key == 'c')   bCam = !bCam;
-    if (key == 't')   ofToggleFullscreen() ;
-    if (key == OF_KEY_RETURN ){
-        stage ++;
-        ofResetElapsedTimeCounter();
-    }
-    if (key == 'R') setup();
+void testApp::loadXMLData() {
+    // start fresh
+    numberOfSavedScores = 0;
+    savedNames.clear();
+    savedScores.clear();
     
+    if( highScores.loadFile("highScores.xml") ){
+        numberOfSavedScores = highScores.getNumTags("game");
+		cout << "highScores.xml loaded! there are " << numberOfSavedScores << " scores loaded!" << endl;
+        for (int i = 0; i < numberOfSavedScores; i++) {
+            highScores.pushTag("game", i);{
+                string tmpName = highScores.getValue("username", " ");
+                int tmpScore = highScores.getValue("score", 0);
+                savedNames.push_back(tmpName);
+                savedScores.push_back(highScores.getValue("score", 0));
+            }highScores.popTag();
+        }
+	}else{
+		cout << "unable to load highScores.xml check data/ folder" << endl;
+        numberOfSavedScores = 0;
+	}
+}
+
+//--------------------------------------------------------------
+void testApp::sortScores() {
+    
+    // start fresh
+    sortedScores.clear();
+    sortedNames.clear();
+    
+    for (int i = 0; i < savedScores.size(); i++) {
+        // cout <<  "name: " << savedNames[i] << " score: " << savedScores[i] << endl;
+    }
+    for (int i = 0; i < savedScores.size(); i++) {
+        float compareNum = -20.0; // arbitrary low number
+        int indexNum = -1;
+        for (int j = 0; j < savedScores.size(); j++) {
+            if (savedScores[j] > compareNum) {
+                // cout << "Good [#" << j << "]: " << savedScores[j] << " is bigger than " << compareNum << endl;
+                compareNum = savedScores[j];
+                indexNum = j;
+            }
+        }
+        sortedScores.push_back(compareNum);
+        // cout << "push back to sortedScores" << endl;
+        sortedNames.push_back(savedNames[indexNum]);
+        // cout << "push Back to sortedNames" << endl;
+        savedScores[indexNum] = -500; // arbitrary really low number
+        // cout << "saving that one at -500" << endl;
+    }
+    
+}
+
+//--------------------------------------------------------------
+void testApp::keyPressed(int key) {
+	
+    if (key == OF_KEY_RETURN ){
+        gamestate ++;
+        savedNames.push_back(username);
+        ofResetElapsedTimeCounter();
+        startedNameEntry = false;
+    }
+    
+    if(startedNameEntry){
+        if(key == OF_KEY_DEL || key == OF_KEY_BACKSPACE){
+            username = username.substr(0, username.length()-1);
+            
+        } else if (key > 31 && key < 127){
+            
+            if( bFirst ){
+                username.clear();
+                bFirst = false;
+            }
+            
+            username.append(1, (char)key);
+        }
+    } else {
+        if (key == 'R') setup();
+        if (key == 'r')  tracker.reset();
+        if (key == OF_KEY_UP)   score ++;
+        if (key == 'C')   bCam = !bCam;
+        if (key == 'T')   ofToggleFullscreen() ;
+    }
 }
 //--------------------------------------------------------------
 void testApp::trackerupdate(){
@@ -211,6 +333,16 @@ void testApp::trackerdraw(){
 
 //--------------------------------------------------------------
 void testApp::mousePressed(int x, int y, int button){
+    ofPushStyle();{
+        ofRectangle _switch = ofRectangle(ofGetWindowWidth()/2-80, 80, 300, 100);
+        if (_switch.inside(x, y)) {
+            startedNameEntry = true;
+            username.clear();
+            cout << "input clicked" << endl;
+        } else {
+            startedNameEntry = false;
+        }
+    }ofPopMatrix();
     
     
 }

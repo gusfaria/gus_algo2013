@@ -7,8 +7,10 @@ using namespace cv;
 
 #include "ofxFaceTracker.h"
 #include "ofxBox2d.h"
+#include "ofxXmlSettings.h"
 #include "Particles.h"
 #include "Burgers.h"
+#include "ofxCenteredTrueTypeFont.h"
 
 class Eyeball {
 public:
@@ -72,8 +74,10 @@ public:
     //game mechanics
     int score;
     int counter;
-    int stage;
-    
+    int gamestate;
+    string username;
+    bool startedNameEntry;
+    bool bFirst;
     //debug
     bool bCam;
     float frameRate;
@@ -81,5 +85,15 @@ public:
     Eyeball leftEye, rightEye;
     ofVec2f eyePos;
     
-    ofTrueTypeFont font16, font30;
+    ofxCenteredTrueTypeFont font16, font30;
+    
+    
+    ofxXmlSettings highScores;
+    void loadXMLData();
+    int numberOfSavedScores;
+    vector<string> savedNames;
+    vector<float> savedScores;
+    vector<string> sortedNames;
+    vector<float> sortedScores;
+    void sortScores();
 };
