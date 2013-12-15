@@ -1,0 +1,28 @@
+FASTFOOD - the game
+
+This is a game making use of Kyle McDonald's ofxFacetracking. Conceptually, it's a critic on fastfood diet, making fun of our desire and pleasure in fast food and it's consequences. The objective of the game is to eat as much mini pizzas and burgers as you can, in a time limit of 1minute. Pizzas are worth 1 point and burgers are worth 5points. The user must open their mouths to eat the food, chewing is essential! The algorithm is comparing the previous mouth height with the current mouth height. Mimicking life, as you eat you get fat, their is a ofCircle behind the character drawing that gets bigger with your score, and it gives the aspect of having gain weight. Also, when you eat too much, you feel heavy and you start loosing your mobility. The character position follows the player's position by using a zeno function and as you get more scores, the "friction" increases making the character slower, giving the feeling of drowsiness. 
+
+
+Try to get to the high score, only really hungry people get to the top. Quick pro tip: the avatar is always looking at the high score meals. I used atan to get the characters eyes to follow the closest burger, but as it has to calculate the distance of every burger, all the time, the framerate got really low, so I changed to calculate the distance of the first item of the burgerList[0]. 
+
+This is a great game for whoever is playing, as well as, for who's watching it.
+
+
+REVIEW & NEXT STEP
+I tried to use ofxBox2d to get a more fluid and better motion for the burgers and pizzas, but I couldn't make it work. There might be a incompatibility with ofxFaceTracker. I also had some problems by using the built in camera, I might get a better result with an alternative camera or infrared. 
+
+This project is very simple and don't make use of a lot of add ons. It mainly used ofxFaceTracker from Kyle McDonald to get the mouth/face of the player. Also, ofxXmlSetting set the high scores, it was added a header called ofxCenteredTrueTypeFont.h to center the text to the screen and I used http://drawscri.pt/  to convert illustrator drawings into ofx code. At last, there are some particle classes for the burgers and pizzas.
+
+So, the next step is:
+- try an alternative for the camera
+- make better visuals (especially for the burger and pizza... they look lame)
+- make it multiplayer, so people can compete with one another ( I heard a lot of people suggesting this )
+- add some more types of food, maybe frieds and hotdogs.
+- add some food that power you up, but take points of you, such as fruits and vegetables. 
+
+THANKS
+Charlie Whitney (class instructor) > https://github.com/cwhitney/algo2013/
+Matt Felsen (class TA) > https://github.com/mattfelsen 
+Albert Kim (for helping me debug ofxFacetracker) > https://github.com/thealkimist/
+Jennifer Presto (for the ranking code and the centered type class) > https://github.com/jenniferpresto/
+Bernardo Schorr (advises and teachings) >  https://github.com/bschorr/

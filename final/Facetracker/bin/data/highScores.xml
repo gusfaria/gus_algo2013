@@ -70,3 +70,27 @@
     <username>alberto</username>
     <score>2</score>
 </game>
+<game>
+    <username>tester</username>
+    <score>34</score>
+</game>
+<game>
+    <username>gus</username>
+    <score>29</score>
+</game>
+<game>
+    <username>gustavo1</username>
+    <score>54</score>
+</game>
+<game>
+    <username>gustavo2</username>
+    <score>37</score>
+</game>
+<game>
+    <username>Enter your name here</username>
+    <score>51</score>
+</game>
+<game>
+    <username>gus</username>
+    <score>52</score>
+</game>
