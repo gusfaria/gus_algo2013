@@ -135,6 +135,8 @@ void testApp::update() {
 //--------------------------------------------------------------
 void testApp::draw() {
     
+    if(gamestate >= 2)         ofBackground(ofColor::black);
+    
     ofSetColor( 255 );
     character( myPos.x, myPos.y );
     leftEye.draw();
@@ -202,10 +204,8 @@ void testApp::draw() {
         font16.drawString("Time: "+ofToString(counter), ofGetWindowWidth()-100, 30);
         
     } else if(counter <= 0 || gamestate == 2 || particleList.size() == 0){
-        
         //UPPER TEXT
         particleList.clear();
-        ofBackground(0);
         ofPushStyle();{
             ofSetColor( 251, 146, 64 );
             font30.drawStringCentered("CONGRATULATIONS "+ username + "!", ofGetWindowWidth()/2, 100);
