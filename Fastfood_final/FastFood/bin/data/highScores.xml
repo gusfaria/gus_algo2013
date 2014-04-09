@@ -154,3 +154,11 @@
     <username>john</username>
     <score>54</score>
 </game>
+<game>
+    <username>thiago</username>
+    <score>5</score>
+</game>
+<game>
+    <username>gustavo</username>
+    <score>23</score>
+</game>
